@@ -1,10 +1,26 @@
 import './style.css';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initParticles } from './particles.js';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+let gsap = null;
+let ScrollTrigger = null;
+let loadGSAPPromise = null;
+
+// Dynamic GSAP Loader
+async function loadGSAP() {
+  if (loadGSAPPromise) return loadGSAPPromise;
+  loadGSAPPromise = (async () => {
+    try {
+      const gsapModule = await import('gsap');
+      const scrollTriggerModule = await import('gsap/ScrollTrigger');
+      gsap = gsapModule.gsap;
+      ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+    } catch (e) {
+      console.error("Failed to load GSAP dynamically:", e);
+    }
+  })();
+  return loadGSAPPromise;
+}
 
 // Initialize Interactive Particles Canvas (Only on Desktop/Tablets for performance)
 let cleanupParticles = null;
@@ -33,9 +49,20 @@ window.addEventListener('DOMContentLoaded', () => {
   if (isMobile) {
     // Skip preloader entirely on mobile to optimize First Contentful Paint (FCP)
     if (preloaderElement) preloaderElement.style.display = 'none';
-    triggerHeroEntrance();
+    
+    // Set counters instantly on mobile
+    const counters = document.querySelectorAll('.counter-value');
+    counters.forEach(counter => {
+      const target = counter.getAttribute('data-target');
+      if (target) counter.textContent = target;
+    });
+    
+    typeEffect();
     return;
   }
+
+  // Desktop: start preloading GSAP in parallel immediately
+  loadGSAP();
 
   let count = 0;
   // Fast fake-loading sequence
@@ -45,15 +72,22 @@ window.addEventListener('DOMContentLoaded', () => {
       count = 100;
       clearInterval(interval);
 
-      // Slide-up preloader once loading reaches 100%
-      gsap.to(preloaderElement, {
-        yPercent: -100,
-        duration: 1.2,
-        ease: 'power4.inOut',
-        onComplete: () => {
-          preloaderElement.style.display = 'none';
-          triggerHeroEntrance(); // Trigger main entrance animations
+      // Slide-up preloader once GSAP has loaded and preloading is complete
+      loadGSAP().then(() => {
+        if (!gsap) {
+          if (preloaderElement) preloaderElement.style.display = 'none';
+          triggerHeroEntrance();
+          return;
         }
+        gsap.to(preloaderElement, {
+          yPercent: -100,
+          duration: 1.2,
+          ease: 'power4.inOut',
+          onComplete: () => {
+            preloaderElement.style.display = 'none';
+            triggerHeroEntrance(); // Trigger main entrance animations
+          }
+        });
       });
     }
     if (counterElement) counterElement.textContent = `${count}%`;
@@ -65,21 +99,6 @@ window.addEventListener('DOMContentLoaded', () => {
 // 2. HERO ENTRANCE ANIMATIONS
 // -------------------------------------------------------------
 function triggerHeroEntrance() {
-  const isMobile = window.innerWidth < 768;
-
-  if (isMobile) {
-    // Render hero elements instantly on mobile to optimize Largest Contentful Paint (LCP)
-    gsap.set('#home .inline-flex, #home h1, #home #typing-text, #home p, #home .flex-wrap, #home .lg\\:col-span-5', {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotate: 0
-    });
-    typeEffect();
-    initScrollAnimations();
-    return;
-  }
-
   // Desktop timeline (beautiful slow animations)
   const tl = gsap.timeline();
   
@@ -124,6 +143,12 @@ function triggerHeroEntrance() {
 
   // Initialize other scroll animations
   initScrollAnimations();
+
+  // Setup magnetic hover script
+  setupMagneticButtons();
+
+  // Initialize custom desktop cursor
+  initCustomCursor();
 }
 
 // -------------------------------------------------------------
@@ -175,55 +200,59 @@ function typeEffect() {
 const cursorDot = document.getElementById('custom-cursor-dot');
 const cursorCircle = document.getElementById('custom-cursor-circle');
 
-if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
-  document.body.classList.add('custom-cursor-active');
-  if (cursorDot) cursorDot.style.opacity = '1';
-  if (cursorCircle) cursorCircle.style.opacity = '1';
+function initCustomCursor() {
+  if (!gsap) return;
+  if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
+    document.body.classList.add('custom-cursor-active');
+    if (cursorDot) cursorDot.style.opacity = '1';
+    if (cursorCircle) cursorCircle.style.opacity = '1';
 
-  // Smooth trail quick setter using GSAP
-  const setDotX = gsap.quickTo(cursorDot, "x", { duration: 0.1, ease: "power3" });
-  const setDotY = gsap.quickTo(cursorDot, "y", { duration: 0.1, ease: "power3" });
-  const setCircleX = gsap.quickTo(cursorCircle, "x", { duration: 0.35, ease: "power3" });
-  const setCircleY = gsap.quickTo(cursorCircle, "y", { duration: 0.35, ease: "power3" });
+    // Smooth trail quick setter using GSAP
+    const setDotX = gsap.quickTo(cursorDot, "x", { duration: 0.1, ease: "power3" });
+    const setDotY = gsap.quickTo(cursorDot, "y", { duration: 0.1, ease: "power3" });
+    const setCircleX = gsap.quickTo(cursorCircle, "x", { duration: 0.35, ease: "power3" });
+    const setCircleY = gsap.quickTo(cursorCircle, "y", { duration: 0.35, ease: "power3" });
 
-  window.addEventListener('mousemove', (e) => {
-    setDotX(e.clientX - 4);
-    setDotY(e.clientY - 4);
-    setCircleX(e.clientX - 16);
-    setCircleY(e.clientY - 16);
-  });
+    window.addEventListener('mousemove', (e) => {
+      setDotX(e.clientX - 4);
+      setDotY(e.clientY - 4);
+      setCircleX(e.clientX - 16);
+      setCircleY(e.clientY - 16);
+    });
 
-  // Cursor expansion states on hover of interactive nodes
-  const interactives = document.querySelectorAll('a, button, .project-filter-btn, .project-details-btn, input, textarea');
-  interactives.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-      gsap.to(cursorCircle, {
-        scale: 1.6,
-        borderColor: '#a855f7',
-        backgroundColor: 'rgba(168, 85, 247, 0.08)',
-        duration: 0.2
+    // Cursor expansion states on hover of interactive nodes
+    const interactives = document.querySelectorAll('a, button, .project-filter-btn, .project-details-btn, input, textarea');
+    interactives.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        gsap.to(cursorCircle, {
+          scale: 1.6,
+          borderColor: '#a855f7',
+          backgroundColor: 'rgba(168, 85, 247, 0.08)',
+          duration: 0.2
+        });
+        gsap.to(cursorDot, {
+          scale: 0.5,
+          backgroundColor: '#60a5fa',
+          duration: 0.2
+        });
       });
-      gsap.to(cursorDot, {
-        scale: 0.5,
-        backgroundColor: '#60a5fa',
-        duration: 0.2
+      element.addEventListener('mouseleave', () => {
+        gsap.to(cursorCircle, {
+          scale: 1,
+          borderColor: '#60a5fa',
+          backgroundColor: 'transparent',
+          duration: 0.2
+        });
+        gsap.to(cursorDot, {
+          scale: 1,
+          backgroundColor: '#a855f7',
+          duration: 0.2
+        });
       });
     });
-    element.addEventListener('mouseleave', () => {
-      gsap.to(cursorCircle, {
-        scale: 1,
-        borderColor: '#60a5fa',
-        backgroundColor: 'transparent',
-        duration: 0.2
-      });
-      gsap.to(cursorDot, {
-        scale: 1,
-        backgroundColor: '#a855f7',
-        duration: 0.2
-      });
-    });
-  });
+  }
 }
+
 
 // -------------------------------------------------------------
 // 5. NAVBAR STICKY EFFECT & NAV ACTIVE HIGHLIGHTING
@@ -315,32 +344,34 @@ if (menuBtn && mobileMenu) {
 // -------------------------------------------------------------
 // 7. MAGNETIC CTA BUTTON INTERACTIONS
 // -------------------------------------------------------------
-if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
-  document.querySelectorAll('.magnetic-btn').forEach(button => {
-    button.addEventListener('mousemove', (e) => {
-      const rect = button.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+function setupMagneticButtons() {
+  if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
+    document.querySelectorAll('.magnetic-btn').forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
 
-      // Pull button 25% of cursor offset distance
-      gsap.to(button, {
-        x: x * 0.25,
-        y: y * 0.25,
-        duration: 0.3,
-        ease: 'power2.out'
+        // Pull button 25% of cursor offset distance
+        gsap.to(button, {
+          x: x * 0.25,
+          y: y * 0.25,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        // Snap back to base position with elastic bounce
+        gsap.to(button, {
+          x: 0,
+          y: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.4)'
+        });
       });
     });
-    
-    button.addEventListener('mouseleave', () => {
-      // Snap back to base position with elastic bounce
-      gsap.to(button, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.4)'
-      });
-    });
-  });
+  }
 }
 
 // -------------------------------------------------------------
@@ -466,22 +497,26 @@ filterButtons.forEach(btn => {
       const cardCategory = card.getAttribute('data-category');
       if (filterVal === 'all' || cardCategory === filterVal) {
         card.style.display = 'flex';
-        gsap.fromTo(card, {
-          scale: 0.92,
-          opacity: 0
-        }, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.45,
-          ease: 'power2.out'
-        });
+        if (gsap) {
+          gsap.fromTo(card, {
+            scale: 0.92,
+            opacity: 0
+          }, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.45,
+            ease: 'power2.out'
+          });
+        }
       } else {
         card.style.display = 'none';
       }
     });
 
     // Refresh ScrollTrigger calculations
-    ScrollTrigger.refresh();
+    if (ScrollTrigger) {
+      ScrollTrigger.refresh();
+    }
   });
 });
 
@@ -607,10 +642,10 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
     // Open Modal Visuals
     if (modal && modalContainer) {
       document.body.classList.add('modal-open');
-      modal.classList.remove('pointer-events-none', 'invisible');
-      modal.classList.add('visible');
-      gsap.to(modal, { opacity: 1, duration: 0.3 });
-      gsap.to(modalContainer, { y: 0, scale: 1, duration: 0.45, ease: 'back.out(1.2)' });
+      modal.classList.remove('pointer-events-none', 'invisible', 'opacity-0');
+      modal.classList.add('visible', 'opacity-100');
+      modalContainer.classList.remove('translate-y-10');
+      modalContainer.classList.add('translate-y-0');
       
       // Focus the close button for accessibility
       setTimeout(() => {
@@ -624,23 +659,18 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
 function closeModal() {
   if (modal && modalContainer) {
     document.body.classList.remove('modal-open');
-    gsap.to(modal, {
-      opacity: 0,
-      duration: 0.3,
-      onComplete: () => {
-        modal.classList.add('pointer-events-none', 'invisible');
-        modal.classList.remove('visible');
-        if (lastActiveElement) {
-          lastActiveElement.focus();
-          lastActiveElement = null;
-        }
+    modal.classList.add('opacity-0');
+    modalContainer.classList.remove('translate-y-0');
+    modalContainer.classList.add('translate-y-10');
+    
+    setTimeout(() => {
+      modal.classList.add('pointer-events-none', 'invisible');
+      modal.classList.remove('visible', 'opacity-100');
+      if (lastActiveElement) {
+        lastActiveElement.focus();
+        lastActiveElement = null;
       }
-    });
-    gsap.to(modalContainer, {
-      y: 50,
-      scale: 0.95,
-      duration: 0.3
-    });
+    }, 300);
   }
 }
 
@@ -670,23 +700,12 @@ function showSlide(index) {
   if (slides.length === 0) return;
 
   slides.forEach((slide, i) => {
-    gsap.killTweensOf(slide);
     if (i === index) {
-      slide.classList.remove('pointer-events-none');
-      gsap.fromTo(slide, 
-        { x: 35, opacity: 0, display: 'flex' }, 
-        { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
-      );
+      slide.classList.remove('opacity-0', 'pointer-events-none');
+      slide.classList.add('active-slide', 'opacity-100', 'pointer-events-auto');
     } else {
-      slide.classList.add('pointer-events-none');
-      gsap.to(slide, { 
-        opacity: 0, 
-        x: -35, 
-        duration: 0.35, 
-        onComplete: () => {
-          gsap.set(slide, { display: 'none' });
-        }
-      });
+      slide.classList.add('opacity-0', 'pointer-events-none');
+      slide.classList.remove('active-slide', 'opacity-100', 'pointer-events-auto');
     }
   });
 
@@ -785,14 +804,22 @@ if (contactForm && formStatus && formSubmitBtn) {
 
       // Fade out success banner
       setTimeout(() => {
-        gsap.to(formStatus, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => {
+        if (gsap) {
+          gsap.to(formStatus, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              formStatus.classList.add('hidden');
+              formStatus.style.opacity = '1';
+            }
+          });
+        } else {
+          formStatus.classList.add('transition-opacity', 'duration-500', 'opacity-0');
+          setTimeout(() => {
             formStatus.classList.add('hidden');
-            formStatus.style.opacity = '1';
-          }
-        });
+            formStatus.classList.remove('transition-opacity', 'duration-500', 'opacity-0');
+          }, 500);
+        }
       }, 6000);
 
     }, 1200);
