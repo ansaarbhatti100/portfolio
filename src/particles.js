@@ -19,7 +19,7 @@ export function initParticles() {
 
   // Adjust particle count based on screen size
   function getParticleCount() {
-    return window.innerWidth < 768 ? 30 : 70;
+    return window.innerWidth < 768 ? 15 : 60;
   }
 
   // Handle window resizing
