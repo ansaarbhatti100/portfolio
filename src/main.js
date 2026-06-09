@@ -483,12 +483,12 @@ filterButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     // Reset active button class styles
     filterButtons.forEach(b => {
-      b.classList.remove('bg-purple-500', 'text-white', 'border-purple-500');
+      b.classList.remove('bg-purple-600', 'text-white', 'border-purple-600');
       b.classList.add('bg-white/5', 'text-slate-300', 'border-white/10');
     });
 
     // Make clicked button primary style
-    btn.classList.add('bg-purple-500', 'text-white', 'border-purple-500');
+    btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
     btn.classList.remove('bg-white/5', 'text-slate-300', 'border-white/10');
 
     const filterVal = btn.getAttribute('data-filter');
@@ -710,12 +710,14 @@ function showSlide(index) {
   });
 
   dots.forEach((dot, i) => {
+    const span = dot.querySelector('span');
+    if (!span) return;
     if (i === index) {
-      dot.classList.remove('bg-white/20');
-      dot.classList.add('bg-purple-500');
+      span.classList.remove('bg-white/20');
+      span.classList.add('bg-purple-500');
     } else {
-      dot.classList.remove('bg-purple-500');
-      dot.classList.add('bg-white/20', 'hover:bg-white/40');
+      span.classList.remove('bg-purple-500');
+      span.classList.add('bg-white/20', 'hover:bg-white/40');
     }
   });
 
