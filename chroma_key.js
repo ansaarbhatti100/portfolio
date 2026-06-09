@@ -3,7 +3,7 @@ import { Jimp } from 'jimp';
 async function processImage() {
   try {
     const userImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\media__1780996887308.jpg';
-    const bgImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\studio_neon_bokeh_bg_1780997552575.png';
+    const bgImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\development_studio_bg_1780997901098.png';
     const outPath = 'f:\\port\\public\\assets\\profile.jpg';
 
     console.log('Reading user image from:', userImgPath);
@@ -26,7 +26,7 @@ async function processImage() {
     const bgB = userImg.bitmap.data[targetIdx + 2];
     console.log(`Sampled background color: RGB(${bgR}, ${bgG}, ${bgB})`);
 
-    // Chroma key thresholds (Tuned for cleaner blue extraction)
+    // Chroma key thresholds
     const thresholdMin = 110;
     const thresholdMax = 175;
 
