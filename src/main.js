@@ -23,9 +23,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const barElement = document.getElementById('preloader-bar');
   const preloaderElement = document.getElementById('preloader');
 
+  const isMobile = window.innerWidth < 768;
+  const incrementStep = isMobile ? 25 : 5; // Fast count on mobile
+  const intervalTime = isMobile ? 8 : 35; // Minimal delay on mobile
+
   // Fast fake-loading sequence
   const interval = setInterval(() => {
-    count += Math.floor(Math.random() * 8) + 4; // Increment randomly
+    count += Math.floor(Math.random() * 8) + incrementStep;
     if (count >= 100) {
       count = 100;
       clearInterval(interval);
@@ -33,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Slide-up preloader once loading reaches 100%
       gsap.to(preloaderElement, {
         yPercent: -100,
-        duration: 1.2,
+        duration: isMobile ? 0.4 : 1.2, // Faster slide-up on mobile
         ease: 'power4.inOut',
         onComplete: () => {
           preloaderElement.style.display = 'none';
@@ -43,7 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     if (counterElement) counterElement.textContent = `${count}%`;
     if (barElement) barElement.style.width = `${count}%`;
-  }, 45);
+  }, intervalTime);
 });
 
 // -------------------------------------------------------------
