@@ -19,6 +19,9 @@ async function processImage() {
     // Resize background image to match the user image size
     bgImg.resize({ w: userWidth, h: userHeight });
 
+    // Apply a soft blur filter to create a professional depth-of-field bokeh effect
+    bgImg.blur(15);
+
     // Sample the background color from top-left (x=10, y=10)
     const targetIdx = (10 + 10 * userWidth) * 4;
     const bgR = userImg.bitmap.data[targetIdx];
