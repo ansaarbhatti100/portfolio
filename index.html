@@ -53,7 +53,7 @@
   <canvas id="particles-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-2]" aria-hidden="true"></canvas>
 
   <!-- Preloader Screen -->
-  <div id="preloader" class="hidden md:flex fixed inset-0 bg-[#080710] z-[99999] flex-col items-center justify-center">
+  <div id="preloader" style="display: none;" class="fixed inset-0 bg-[#080710] z-[99999] flex-col items-center justify-center">
     <div class="relative flex flex-col items-center">
       <!-- Pulsing Glow Logo -->
       <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 to-blue-500 flex items-center justify-center text-3xl font-extrabold text-white shadow-[0_0_40px_rgba(168,85,247,0.4)] animate-bounce mb-8" role="img" aria-label="Ansaar Bhatti Logo">
@@ -70,6 +70,11 @@
       </div>
     </div>
   </div>
+  <script>
+    if (window.innerWidth >= 768) {
+      document.getElementById('preloader').style.display = 'flex';
+    }
+  </script>
 
   <!-- Header & Navigation -->
   <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6">

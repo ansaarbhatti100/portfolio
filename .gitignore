@@ -29,3 +29,8 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 Thumbs.db
+
+# Lighthouse & temp folders
+lh-report.json
+tmp/
+
