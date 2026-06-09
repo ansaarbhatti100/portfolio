@@ -167,9 +167,29 @@ const typingSpeed = 70;
 const erasingSpeed = 40;
 const delayBetweenWords = 2500;
 const typingTextElement = document.getElementById('typing-text');
+let isTypingPaused = false;
+
+// Pause typing animation when offscreen to optimize layout CPU thread usage
+if ('IntersectionObserver' in window) {
+  const heroSection = document.getElementById('home');
+  if (heroSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isTypingPaused = !entry.isIntersecting;
+      });
+    }, { threshold: 0.05 });
+    observer.observe(heroSection);
+  }
+}
 
 function typeEffect() {
   if (!typingTextElement) return;
+
+  if (isTypingPaused) {
+    // Recheck visibility in 500ms
+    setTimeout(typeEffect, 500);
+    return;
+  }
 
   const currentWord = words[wordIdx];
   if (isDeleting) {
