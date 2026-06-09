@@ -6,30 +6,41 @@ import { initParticles } from './particles.js';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// Initialize Interactive Particles Canvas
+// Initialize Interactive Particles Canvas (Only on Desktop/Tablets for performance)
 let cleanupParticles = null;
-try {
-  cleanupParticles = initParticles();
-} catch (e) {
-  console.error("Failed to initialize particles background:", e);
+if (window.innerWidth >= 768) {
+  try {
+    cleanupParticles = initParticles();
+  } catch (e) {
+    console.error("Failed to initialize particles background:", e);
+  }
+} else {
+  // Hide canvas on mobile
+  const canvas = document.getElementById('particles-canvas');
+  if (canvas) canvas.style.display = 'none';
 }
 
 // -------------------------------------------------------------
 // 1. PRELOADER & COUNTER INITIALIZATION
 // -------------------------------------------------------------
 window.addEventListener('DOMContentLoaded', () => {
-  let count = 0;
   const counterElement = document.getElementById('preloader-counter');
   const barElement = document.getElementById('preloader-bar');
   const preloaderElement = document.getElementById('preloader');
 
   const isMobile = window.innerWidth < 768;
-  const incrementStep = isMobile ? 25 : 5; // Fast count on mobile
-  const intervalTime = isMobile ? 8 : 35; // Minimal delay on mobile
+  
+  if (isMobile) {
+    // Skip preloader entirely on mobile to optimize First Contentful Paint (FCP)
+    if (preloaderElement) preloaderElement.style.display = 'none';
+    triggerHeroEntrance();
+    return;
+  }
 
+  let count = 0;
   // Fast fake-loading sequence
   const interval = setInterval(() => {
-    count += Math.floor(Math.random() * 8) + incrementStep;
+    count += Math.floor(Math.random() * 8) + 5;
     if (count >= 100) {
       count = 100;
       clearInterval(interval);
@@ -37,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Slide-up preloader once loading reaches 100%
       gsap.to(preloaderElement, {
         yPercent: -100,
-        duration: isMobile ? 0.4 : 1.2, // Faster slide-up on mobile
+        duration: 1.2,
         ease: 'power4.inOut',
         onComplete: () => {
           preloaderElement.style.display = 'none';
@@ -47,14 +58,29 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     if (counterElement) counterElement.textContent = `${count}%`;
     if (barElement) barElement.style.width = `${count}%`;
-  }, intervalTime);
+  }, 35);
 });
 
 // -------------------------------------------------------------
 // 2. HERO ENTRANCE ANIMATIONS
 // -------------------------------------------------------------
 function triggerHeroEntrance() {
-  // Animate Hero tags, headings, typing text, and buttons
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile) {
+    // Render hero elements instantly on mobile to optimize Largest Contentful Paint (LCP)
+    gsap.set('#home .inline-flex, #home h1, #home #typing-text, #home p, #home .flex-wrap, #home .lg\\:col-span-5', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0
+    });
+    typeEffect();
+    initScrollAnimations();
+    return;
+  }
+
+  // Desktop timeline (beautiful slow animations)
   const tl = gsap.timeline();
   
   tl.from('#home .inline-flex', {
@@ -251,13 +277,19 @@ if (menuBtn && mobileMenu) {
   menuBtn.addEventListener('click', () => {
     isMenuOpen = !isMenuOpen;
     if (isMenuOpen) {
-      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.remove('translate-x-full', 'invisible');
+      mobileMenu.classList.add('visible');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
       hamLine1.classList.add('rotate-45', 'translate-y-2');
       hamLine2.classList.add('opacity-0');
       hamLine3.classList.add('-rotate-45', '-translate-y-2');
       document.body.classList.add('overflow-hidden');
     } else {
-      mobileMenu.classList.add('translate-x-full');
+      mobileMenu.classList.add('translate-x-full', 'invisible');
+      mobileMenu.classList.remove('visible');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
       hamLine1.classList.remove('rotate-45', 'translate-y-2');
       hamLine2.classList.remove('opacity-0');
       hamLine3.classList.remove('-rotate-45', '-translate-y-2');
@@ -268,7 +300,10 @@ if (menuBtn && mobileMenu) {
   document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', () => {
       isMenuOpen = false;
-      mobileMenu.classList.add('translate-x-full');
+      mobileMenu.classList.add('translate-x-full', 'invisible');
+      mobileMenu.classList.remove('visible');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
       hamLine1.classList.remove('rotate-45', 'translate-y-2');
       hamLine2.classList.remove('opacity-0');
       hamLine3.classList.remove('-rotate-45', '-translate-y-2');
@@ -280,36 +315,50 @@ if (menuBtn && mobileMenu) {
 // -------------------------------------------------------------
 // 7. MAGNETIC CTA BUTTON INTERACTIONS
 // -------------------------------------------------------------
-document.querySelectorAll('.magnetic-btn').forEach(button => {
-  button.addEventListener('mousemove', (e) => {
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
+  document.querySelectorAll('.magnetic-btn').forEach(button => {
+    button.addEventListener('mousemove', (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
 
-    // Pull button 25% of cursor offset distance
-    gsap.to(button, {
-      x: x * 0.25,
-      y: y * 0.25,
-      duration: 0.3,
-      ease: 'power2.out'
+      // Pull button 25% of cursor offset distance
+      gsap.to(button, {
+        x: x * 0.25,
+        y: y * 0.25,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+    
+    button.addEventListener('mouseleave', () => {
+      // Snap back to base position with elastic bounce
+      gsap.to(button, {
+        x: 0,
+        y: 0,
+        duration: 0.6,
+        ease: 'elastic.out(1, 0.4)'
+      });
     });
   });
-  
-  button.addEventListener('mouseleave', () => {
-    // Snap back to base position with elastic bounce
-    gsap.to(button, {
-      x: 0,
-      y: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.4)'
-    });
-  });
-});
+}
 
 // -------------------------------------------------------------
 // 8. SCROLL TRIGGER ANIMATIONS & STATISTICS COUNTERS
 // -------------------------------------------------------------
 function initScrollAnimations() {
+  const isMobile = window.innerWidth < 768;
+  
+  if (isMobile) {
+    // Instantly set counter values to target values on mobile for performance
+    const counters = document.querySelectorAll('.counter-value');
+    counters.forEach(counter => {
+      const target = counter.getAttribute('data-target');
+      if (target) counter.textContent = target;
+    });
+    return;
+  }
+
   // 1. About section fade-in
   gsap.from('#about .lg\\:col-span-7, #about .lg\\:col-span-5', {
     scrollTrigger: {
@@ -502,6 +551,7 @@ const projectDetailsData = {
   }
 };
 
+let lastActiveElement = null;
 const modal = document.getElementById('project-modal');
 const modalContainer = document.getElementById('project-modal-container');
 const modalContent = document.getElementById('modal-content');
@@ -512,18 +562,20 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
     const data = projectDetailsData[prjKey];
     if (!data) return;
 
+    lastActiveElement = document.activeElement;
+
     modalContent.innerHTML = `
       <div class="relative rounded-2xl overflow-hidden aspect-video border border-white/10 mb-6 bg-slate-900">
-        <img src="${data.image}" alt="${data.title}" class="w-full h-full object-cover">
+        <img src="${data.image}" alt="${data.title}" decoding="async" class="w-full h-full object-cover">
       </div>
       <div class="space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div>
             <span class="text-xs uppercase tracking-widest text-purple-400 font-bold font-mono">${data.category}</span>
-            <h3 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">${data.title}</h3>
+            <h3 id="modal-title" class="text-3xl sm:text-4xl font-extrabold text-white mt-1">${data.title}</h3>
           </div>
-          <a href="${data.demoLink}" class="magnetic-btn px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold text-sm shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all">
-            Launch Live Demo <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+          <a href="${data.demoLink}" aria-label="Launch live demo of ${data.title}" class="magnetic-btn px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold text-sm shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all">
+            Launch Live Demo <i class="fas fa-external-link-alt ml-2 text-xs" aria-hidden="true"></i>
           </a>
         </div>
         
@@ -534,7 +586,7 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
           <ul class="space-y-2 text-sm text-slate-400">
             ${data.features.map(feat => `
               <li class="flex items-start">
-                <i class="fas fa-check text-purple-500 mt-1 mr-3 text-xs"></i>
+                <i class="fas fa-check text-purple-500 mt-1 mr-3 text-xs" aria-hidden="true"></i>
                 <span>${feat}</span>
               </li>
             `).join('')}
@@ -542,7 +594,7 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
         </div>
         
         <div class="pt-6">
-          <h4 class="text-sm uppercase tracking-widest text-slate-500 font-bold font-mono mb-3">Technologies Employed</h4>
+          <h4 class="text-sm uppercase tracking-widest text-slate-400 font-bold font-mono mb-3">Technologies Employed</h4>
           <div class="flex flex-wrap gap-2">
             ${data.technologies.map(tech => `
               <span class="bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300">${tech}</span>
@@ -555,9 +607,16 @@ document.querySelectorAll('.project-details-btn').forEach(btn => {
     // Open Modal Visuals
     if (modal && modalContainer) {
       document.body.classList.add('modal-open');
-      modal.classList.remove('pointer-events-none');
+      modal.classList.remove('pointer-events-none', 'invisible');
+      modal.classList.add('visible');
       gsap.to(modal, { opacity: 1, duration: 0.3 });
       gsap.to(modalContainer, { y: 0, scale: 1, duration: 0.45, ease: 'back.out(1.2)' });
+      
+      // Focus the close button for accessibility
+      setTimeout(() => {
+        const closeBtn = document.getElementById('modal-close-btn');
+        if (closeBtn) closeBtn.focus();
+      }, 100);
     }
   });
 });
@@ -569,7 +628,12 @@ function closeModal() {
       opacity: 0,
       duration: 0.3,
       onComplete: () => {
-        modal.classList.add('pointer-events-none');
+        modal.classList.add('pointer-events-none', 'invisible');
+        modal.classList.remove('visible');
+        if (lastActiveElement) {
+          lastActiveElement.focus();
+          lastActiveElement = null;
+        }
       }
     });
     gsap.to(modalContainer, {
@@ -742,11 +806,11 @@ const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
 if (scrollToTopBtn) {
   window.addEventListener('scroll', () => {
     if (window.scrollY > 400) {
-      scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-      scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+      scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4', 'invisible');
+      scrollToTopBtn.classList.add('opacity-100', 'translate-y-0', 'visible');
     } else {
-      scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-      scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+      scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4', 'invisible');
+      scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'visible');
     }
   });
 

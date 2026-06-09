@@ -142,3 +142,20 @@
 body.modal-open {
   overflow: hidden;
 }
+
+/* Visible Focus Ring for Keyboard Navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brand-purple-light);
+  outline-offset: 4px;
+}
+
+/* Optimize rendering speed on mobile by skipping layout for off-screen sections */
+@media (max-w: 767px) {
+  section:not(#home) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}

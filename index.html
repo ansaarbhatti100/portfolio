@@ -19,8 +19,10 @@
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="preload" href="/assets/profile.jpg" as="image" type="image/jpeg" media="(min-width: 768px)">
   
   <style>
     /* Prevent FOUC (Flash of Unstyled Content) before Tailwind loads */
@@ -37,20 +39,20 @@
   <div id="custom-cursor-circle" class="fixed top-0 left-0 w-8 h-8 border border-blue-400 rounded-full pointer-events-none z-[9998] opacity-0 transition-opacity duration-300"></div>
 
   <!-- Ambient Glowing Background Blobs -->
-  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden" aria-hidden="true">
     <div class="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[120px] animate-pulse" style="animation-duration: 12s;"></div>
     <div class="absolute top-[30%] -right-40 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[150px] animate-pulse" style="animation-duration: 15s;"></div>
     <div class="absolute -bottom-40 left-[20%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[130px] animate-pulse" style="animation-duration: 18s;"></div>
   </div>
 
   <!-- Interactive Particles Canvas -->
-  <canvas id="particles-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-2]"></canvas>
+  <canvas id="particles-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-2]" aria-hidden="true"></canvas>
 
   <!-- Preloader Screen -->
-  <div id="preloader" class="fixed inset-0 bg-[#080710] z-[99999] flex flex-col items-center justify-center">
+  <div id="preloader" class="hidden md:flex fixed inset-0 bg-[#080710] z-[99999] flex-col items-center justify-center">
     <div class="relative flex flex-col items-center">
       <!-- Pulsing Glow Logo -->
-      <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 to-blue-500 flex items-center justify-center text-3xl font-extrabold text-white shadow-[0_0_40px_rgba(168,85,247,0.4)] animate-bounce mb-8">
+      <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 to-blue-500 flex items-center justify-center text-3xl font-extrabold text-white shadow-[0_0_40px_rgba(168,85,247,0.4)] animate-bounce mb-8" role="img" aria-label="Ansaar Bhatti Logo">
         AB
       </div>
       <!-- Progress Ring/Line -->
@@ -95,7 +97,7 @@
       </div>
 
       <!-- Hamburger Button (Mobile) -->
-      <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white focus:outline-none z-50 transition-colors hover:bg-white/10" aria-label="Toggle Menu">
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white focus:outline-none z-50 transition-colors hover:bg-white/10" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-menu">
         <span class="w-5 h-0.5 bg-current transition-transform duration-300 ease-out mb-1.5" id="hamburger-line1"></span>
         <span class="w-5 h-0.5 bg-current transition-all duration-300 ease-out" id="hamburger-line2"></span>
         <span class="w-5 h-0.5 bg-current transition-transform duration-300 ease-out mt-1.5" id="hamburger-line3"></span>
@@ -105,7 +107,7 @@
   </header>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed inset-0 bg-[#080710]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 flex flex-col justify-center px-10">
+  <div id="mobile-menu" class="fixed inset-0 bg-[#080710]/95 backdrop-blur-xl z-40 translate-x-full invisible transition-[transform,visibility] duration-500 flex flex-col justify-center px-10" aria-hidden="true" role="navigation" aria-label="Mobile Navigation">
     <nav class="flex flex-col space-y-6 text-3xl font-bold font-display">
       <a href="#home" class="mobile-nav-link text-slate-400 hover:text-white transition-colors">01. Home</a>
       <a href="#about" class="mobile-nav-link text-slate-400 hover:text-white transition-colors">02. About</a>
@@ -119,9 +121,9 @@
       <span class="text-sm font-semibold tracking-widest text-slate-400 uppercase">Say Hello</span>
       <a href="mailto:ansaar.bhatti100@gmail.com" class="text-xl text-purple-400 hover:text-purple-300">ansaar.bhatti100@gmail.com</a>
       <div class="flex space-x-6 pt-4">
-        <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white text-xl" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="text-slate-400 hover:text-white text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="text-slate-400 hover:text-white text-xl" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white text-xl" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="#" class="text-slate-400 hover:text-white text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="#" class="text-slate-400 hover:text-white text-xl" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -170,10 +172,10 @@
           
           <!-- Social Icons -->
           <div class="flex items-center justify-center lg:justify-start space-x-6 pt-6 text-slate-400">
-            <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-300 text-xl" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-300 text-xl" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="#" class="hover:text-white transition-colors duration-300 text-xl" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
           </div>
         </div>
         
@@ -181,13 +183,13 @@
         <div class="lg:col-span-5 flex justify-center items-center z-10">
           <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 group">
             <!-- Neon background glow -->
-            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none scale-105"></div>
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none scale-105" aria-hidden="true"></div>
             
             <!-- Glass container outer ring -->
             <div class="absolute inset-0 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-md flex items-center justify-center transform rotate-6 group-hover:rotate-3 transition-transform duration-500 shadow-2xl">
               <!-- Actual image placeholder wrapper -->
               <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative transform -rotate-6 group-hover:-rotate-3 transition-transform duration-500">
-                <img src="/assets/profile.jpg" alt="Ansaar Bhatti" id="profile-img" width="510" height="660" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <img src="/assets/profile.jpg" alt="Ansaar Bhatti" id="profile-img" width="510" height="660" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 
                 <!-- Floating tags -->
                 <div class="absolute bottom-4 left-4 bg-[#080710]/80 border border-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl flex items-center space-x-2">
@@ -201,10 +203,10 @@
       </div>
 
       <!-- Scroll Down Indicator -->
-      <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 text-slate-500 hover:text-white transition-colors duration-300 z-10">
+      <a href="#about" aria-label="Scroll to About section" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 text-slate-400 hover:text-white transition-colors duration-300 z-10">
         <span class="text-xs font-semibold uppercase tracking-widest font-mono">SCROLL</span>
-        <div class="w-6 h-10 border-2 border-slate-500 rounded-full flex justify-center p-1.5">
-          <div class="w-1.5 h-2.5 bg-slate-500 rounded-full animate-bounce"></div>
+        <div class="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center p-1.5">
+          <div class="w-1.5 h-2.5 bg-slate-400 rounded-full animate-bounce"></div>
         </div>
       </a>
     </section>
@@ -244,7 +246,7 @@
             
             <!-- Card 1 -->
             <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col justify-center space-y-2 hover:border-purple-500/30 transition-all duration-300 group">
-              <div class="text-purple-400 text-3xl mb-1"><i class="fas fa-code"></i></div>
+              <div class="text-purple-400 text-3xl mb-1"><i class="fas fa-code" aria-hidden="true"></i></div>
               <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono flex items-center">
                 <span class="counter-value" data-target="5">0</span><span class="text-purple-500">+</span>
               </span>
@@ -253,7 +255,7 @@
             
             <!-- Card 2 -->
             <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col justify-center space-y-2 hover:border-blue-500/30 transition-all duration-300 group">
-              <div class="text-blue-400 text-3xl mb-1"><i class="fas fa-check-circle"></i></div>
+              <div class="text-blue-400 text-3xl mb-1"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
               <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono flex items-center">
                 <span class="counter-value" data-target="150">0</span><span class="text-blue-500">+</span>
               </span>
@@ -262,7 +264,7 @@
 
             <!-- Card 3 -->
             <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col justify-center space-y-2 hover:border-indigo-500/30 transition-all duration-300 group">
-              <div class="text-indigo-400 text-3xl mb-1"><i class="fas fa-smile"></i></div>
+              <div class="text-indigo-400 text-3xl mb-1"><i class="fas fa-smile" aria-hidden="true"></i></div>
               <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono flex items-center">
                 <span class="counter-value" data-target="99">0</span><span class="text-indigo-500">%</span>
               </span>
@@ -271,7 +273,7 @@
 
             <!-- Card 4 -->
             <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col justify-center space-y-2 hover:border-violet-500/30 transition-all duration-300 group">
-              <div class="text-violet-400 text-3xl mb-1"><i class="fas fa-network-wired"></i></div>
+              <div class="text-violet-400 text-3xl mb-1"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
               <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono flex items-center">
                 <span class="counter-value" data-target="24">0</span><span class="text-violet-500">/7</span>
               </span>
@@ -566,8 +568,8 @@
           <!-- Project 1: Hospital Management Website -->
           <div class="project-card bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-purple-500/30 hover:shadow-[0_20px_50px_rgba(147,51,234,0.1)] group flex flex-col justify-between" data-category="custom">
             <div class="relative overflow-hidden aspect-video">
-              <img src="/assets/project1.jpg" alt="Hospital Management Website" width="800" height="450" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60"></div>
+              <img src="/assets/project1.jpg" alt="Hospital Management Website" width="800" height="450" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60" aria-hidden="true"></div>
               <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">Custom Web</div>
             </div>
             
@@ -588,11 +590,11 @@
 
             <!-- CTA Buttons -->
             <div class="px-8 pb-8 pt-2 grid grid-cols-2 gap-4">
-              <a href="#" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all duration-300 flex items-center justify-center">
-                <i class="fas fa-external-link-alt mr-2 text-xs"></i> Live Demo
+              <a href="#" role="button" aria-label="View live demo of Hospital Management Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all duration-300 flex items-center justify-center">
+                <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
               </a>
-              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project1">
-                <i class="fas fa-info-circle mr-2 text-xs"></i> Details
+              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project1" aria-label="View details of Hospital Management Website">
+                <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
               </button>
             </div>
           </div>
@@ -600,8 +602,8 @@
           <!-- Project 2: Leather eCommerce Store -->
           <div class="project-card bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group flex flex-col justify-between" data-category="wordpress">
             <div class="relative overflow-hidden aspect-video">
-              <img src="/assets/project2.jpg" alt="Leather eCommerce Store" width="800" height="450" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60"></div>
+              <img src="/assets/project2.jpg" alt="Leather eCommerce Store" width="800" height="450" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60" aria-hidden="true"></div>
               <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">WordPress</div>
             </div>
             
@@ -622,11 +624,11 @@
 
             <!-- CTA Buttons -->
             <div class="px-8 pb-8 pt-2 grid grid-cols-2 gap-4">
-              <a href="#" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center">
-                <i class="fas fa-external-link-alt mr-2 text-xs"></i> Live Demo
+              <a href="#" role="button" aria-label="View live demo of Leather eCommerce Store" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center">
+                <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
               </a>
-              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project2">
-                <i class="fas fa-info-circle mr-2 text-xs"></i> Details
+              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project2" aria-label="View details of Leather eCommerce Store">
+                <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
               </button>
             </div>
           </div>
@@ -634,8 +636,8 @@
           <!-- Project 3: Business Portfolio Website -->
           <div class="project-card bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-indigo-500/30 hover:shadow-[0_20px_50px_rgba(99,102,241,0.1)] group flex flex-col justify-between" data-category="wordpress">
             <div class="relative overflow-hidden aspect-video">
-              <img src="/assets/project3.jpg" alt="Business Portfolio Website" width="800" height="450" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60"></div>
+              <img src="/assets/project3.jpg" alt="Business Portfolio Website" width="800" height="450" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60" aria-hidden="true"></div>
               <div class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">WordPress</div>
             </div>
             
@@ -656,11 +658,11 @@
 
             <!-- CTA Buttons -->
             <div class="px-8 pb-8 pt-2 grid grid-cols-2 gap-4">
-              <a href="#" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(99,102,241,0.3)] transition-all duration-300 flex items-center justify-center">
-                <i class="fas fa-external-link-alt mr-2 text-xs"></i> Live Demo
+              <a href="#" role="button" aria-label="View live demo of Business Portfolio Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(99,102,241,0.3)] transition-all duration-300 flex items-center justify-center">
+                <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
               </a>
-              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project3">
-                <i class="fas fa-info-circle mr-2 text-xs"></i> Details
+              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project3" aria-label="View details of Business Portfolio Website">
+                <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
               </button>
             </div>
           </div>
@@ -668,8 +670,8 @@
           <!-- Project 4: Custom WordPress Management System -->
           <div class="project-card bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-violet-500/30 hover:shadow-[0_20px_50px_rgba(139,92,246,0.1)] group flex flex-col justify-between" data-category="custom">
             <div class="relative overflow-hidden aspect-video">
-              <img src="/assets/project4.jpg" alt="Custom WordPress Management System" width="800" height="450" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60"></div>
+              <img src="/assets/project4.jpg" alt="Custom WordPress Management System" width="800" height="450" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#080710] to-transparent opacity-60" aria-hidden="true"></div>
               <div class="absolute top-4 left-4 bg-violet-600 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">Custom Web</div>
             </div>
             
@@ -690,11 +692,11 @@
 
             <!-- CTA Buttons -->
             <div class="px-8 pb-8 pt-2 grid grid-cols-2 gap-4">
-              <a href="#" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all duration-300 flex items-center justify-center">
-                <i class="fas fa-external-link-alt mr-2 text-xs"></i> Live Demo
+              <a href="#" role="button" aria-label="View live demo of Custom WordPress Management System" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all duration-300 flex items-center justify-center">
+                <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
               </a>
-              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project4">
-                <i class="fas fa-info-circle mr-2 text-xs"></i> Details
+              <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer" data-project="project4" aria-label="View details of Custom WordPress Management System">
+                <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
               </button>
             </div>
           </div>
@@ -768,18 +770,18 @@
           <div class="flex justify-between items-center mt-8 pt-8 border-t border-white/10">
             <!-- Pagination Dots -->
             <div class="flex space-x-2" id="testimonial-dots">
-              <button class="w-2.5 h-2.5 rounded-full bg-purple-500 transition-colors" data-slide="0"></button>
-              <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-colors" data-slide="1"></button>
-              <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-colors" data-slide="2"></button>
+              <button class="w-2.5 h-2.5 rounded-full bg-purple-500 transition-colors" data-slide="0" aria-label="Show review 1 of 3"></button>
+              <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-colors" data-slide="1" aria-label="Show review 2 of 3"></button>
+              <button class="w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-colors" data-slide="2" aria-label="Show review 3 of 3"></button>
             </div>
             
             <!-- Arrows -->
             <div class="flex space-x-3">
               <button id="prev-testimonial-btn" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer" aria-label="Previous Review">
-                <i class="fas fa-chevron-left text-sm"></i>
+                <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
               </button>
               <button id="next-testimonial-btn" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer" aria-label="Next Review">
-                <i class="fas fa-chevron-right text-sm"></i>
+                <i class="fas fa-chevron-right text-sm" aria-hidden="true"></i>
               </button>
             </div>
           </div>
@@ -812,7 +814,7 @@
               <!-- Email Card -->
               <a href="mailto:ansaar.bhatti100@gmail.com" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-purple-500/30 transition-all duration-300 group">
                 <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
-                  <i class="far fa-envelope"></i>
+                  <i class="far fa-envelope" aria-hidden="true"></i>
                 </div>
                 <div>
                   <span class="block text-xs uppercase font-semibold text-slate-400 tracking-wider font-mono">Email Address</span>
@@ -823,7 +825,7 @@
               <!-- WhatsApp Card -->
               <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-green-500/30 transition-all duration-300 group">
                 <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 text-xl group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
-                  <i class="fab fa-whatsapp"></i>
+                  <i class="fab fa-whatsapp" aria-hidden="true"></i>
                 </div>
                 <div>
                   <span class="block text-xs uppercase font-semibold text-slate-400 tracking-wider font-mono">WhatsApp Support</span>
@@ -834,7 +836,7 @@
               <!-- LinkedIn Card -->
               <a href="#" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 transition-all duration-300 group">
                 <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-xl group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                  <i class="fab fa-linkedin-in"></i>
+                  <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                 </div>
                 <div>
                   <span class="block text-xs uppercase font-semibold text-slate-400 tracking-wider font-mono">LinkedIn Profile</span>
@@ -847,10 +849,10 @@
             <div class="pt-6">
               <span class="block text-xs uppercase font-semibold text-slate-400 tracking-widest font-mono mb-4">Follow My Coding Journey</span>
               <div class="flex space-x-4">
-                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="GitHub"><i class="fab fa-github text-lg"></i></a>
-                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Twitter"><i class="fab fa-twitter text-lg"></i></a>
-                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Behance"><i class="fab fa-behance text-lg"></i></a>
-                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Dribbble"><i class="fab fa-dribbble text-lg"></i></a>
+                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="GitHub"><i class="fab fa-github text-lg" aria-hidden="true"></i></a>
+                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Twitter"><i class="fab fa-twitter text-lg" aria-hidden="true"></i></a>
+                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Behance"><i class="fab fa-behance text-lg" aria-hidden="true"></i></a>
+                <a href="#" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300" aria-label="Dribbble"><i class="fab fa-dribbble text-lg" aria-hidden="true"></i></a>
               </div>
             </div>
 
@@ -891,7 +893,7 @@
               <!-- Submit -->
               <button type="submit" id="submit-btn" class="magnetic-btn w-full relative overflow-hidden group py-4 rounded-xl text-base font-bold bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-[0_4px_20px_rgba(147,51,234,0.3)] transition-all duration-300 cursor-pointer">
                 <span class="relative z-10 flex items-center justify-center">
-                  Send Message <i class="far fa-paper-plane ml-2.5 text-sm"></i>
+                  Send Message <i class="far fa-paper-plane ml-2.5 text-sm" aria-hidden="true"></i>
                 </span>
                 <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-blue-500 to-purple-600 transition-transform duration-500 ease-out z-0"></div>
               </button>
@@ -937,17 +939,17 @@
   </footer>
 
   <!-- Scroll to Top Button -->
-  <button id="scroll-to-top-btn" class="fixed bottom-8 right-8 w-12 h-12 bg-purple-600/80 hover:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-md border border-white/10 opacity-0 pointer-events-none translate-y-4 transition-all duration-300 cursor-pointer z-40 hover:-translate-y-1" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up text-sm"></i>
+  <button id="scroll-to-top-btn" class="fixed bottom-8 right-8 w-12 h-12 bg-purple-600/80 hover:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-md border border-white/10 opacity-0 pointer-events-none invisible translate-y-4 transition-all duration-300 cursor-pointer z-40 hover:-translate-y-1" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up text-sm" aria-hidden="true"></i>
   </button>
 
   <!-- Project Details Modal (Reusable container) -->
-  <div id="project-modal" class="fixed inset-0 bg-[#080710]/80 backdrop-blur-md z-[99999] opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+  <div id="project-modal" class="fixed inset-0 bg-[#080710]/80 backdrop-blur-md z-[99999] opacity-0 pointer-events-none invisible transition-all duration-300 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="bg-[#080710] border border-white/10 max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-10 relative shadow-2xl transition-transform duration-300 translate-y-10" id="project-modal-container">
       
       <!-- Close Button -->
       <button id="modal-close-btn" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer z-50" aria-label="Close Modal">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times" aria-hidden="true"></i>
       </button>
       
       <!-- Content (Injected by JS) -->
