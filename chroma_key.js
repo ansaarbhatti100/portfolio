@@ -3,7 +3,7 @@ import { Jimp } from 'jimp';
 async function processImage() {
   try {
     const userImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\media__1780996887308.jpg';
-    const bgImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\tech_workspace_bg_1780997156294.png';
+    const bgImgPath = 'C:\\Users\\DELL\\.gemini\\antigravity\\brain\\643346a1-384b-4160-afa1-63d22834c48d\\studio_neon_bokeh_bg_1780997552575.png';
     const outPath = 'f:\\port\\public\\assets\\profile.jpg';
 
     console.log('Reading user image from:', userImgPath);
@@ -26,9 +26,9 @@ async function processImage() {
     const bgB = userImg.bitmap.data[targetIdx + 2];
     console.log(`Sampled background color: RGB(${bgR}, ${bgG}, ${bgB})`);
 
-    // Chroma key thresholds
-    const thresholdMin = 100;
-    const thresholdMax = 160;
+    // Chroma key thresholds (Tuned for cleaner blue extraction)
+    const thresholdMin = 110;
+    const thresholdMax = 175;
 
     for (let y = 0; y < userHeight; y++) {
       for (let x = 0; x < userWidth; x++) {
@@ -77,16 +77,27 @@ async function processImage() {
           }
 
           if (isEdge) {
-            // Apply a soft blue/purple rim glow to blend with the lighting of the monitors
-            userImg.bitmap.data[idx] = Math.round(r * 0.75 + 130 * 0.25);
-            userImg.bitmap.data[idx + 1] = Math.round(g * 0.75 + 90 * 0.25);
-            userImg.bitmap.data[idx + 2] = Math.round(b * 0.7 + 250 * 0.30);
+            // Apply a soft blue/purple rim glow to blend with the lighting of the studio backlights
+            userImg.bitmap.data[idx] = Math.round(r * 0.70 + 130 * 0.30);
+            userImg.bitmap.data[idx + 1] = Math.round(g * 0.70 + 90 * 0.30);
+            userImg.bitmap.data[idx + 2] = Math.round(b * 0.65 + 250 * 0.35);
           } else {
-            // Apply overall color correction to fit the dark room (slight blue shift, reduce exposure)
-            const brightness = 0.96;
-            userImg.bitmap.data[idx] = Math.min(255, Math.round(r * brightness));
-            userImg.bitmap.data[idx + 1] = Math.min(255, Math.round(g * brightness));
-            userImg.bitmap.data[idx + 2] = Math.min(255, Math.round(b * brightness * 1.05));
+            // Color grading to match the studio portrait room:
+            // 1. Lower exposure by 14% to fit dark room atmosphere
+            let finalR = r * 0.86;
+            let finalG = g * 0.86;
+            let finalB = b * 0.86 * 1.06; // slight blue/cool shadows shift
+
+            // 2. Increase contrast slightly by 10% (slight S-curve)
+            const contrast = 1.1;
+            finalR = ((finalR / 255 - 0.5) * contrast + 0.5) * 255;
+            finalG = ((finalG / 255 - 0.5) * contrast + 0.5) * 255;
+            finalB = ((finalB / 255 - 0.5) * contrast + 0.5) * 255;
+
+            // Clamping
+            userImg.bitmap.data[idx] = Math.max(0, Math.min(255, Math.round(finalR)));
+            userImg.bitmap.data[idx + 1] = Math.max(0, Math.min(255, Math.round(finalG)));
+            userImg.bitmap.data[idx + 2] = Math.max(0, Math.min(255, Math.round(finalB)));
           }
         }
       }
