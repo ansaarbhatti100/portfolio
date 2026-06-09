@@ -602,13 +602,23 @@ function showSlide(index) {
   if (slides.length === 0) return;
 
   slides.forEach((slide, i) => {
+    gsap.killTweensOf(slide);
     if (i === index) {
-      slide.classList.remove('opacity-0', 'pointer-events-none');
-      slide.classList.add('opacity-100');
-      gsap.fromTo(slide, { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
+      slide.classList.remove('pointer-events-none');
+      gsap.fromTo(slide, 
+        { x: 35, opacity: 0, display: 'flex' }, 
+        { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
+      );
     } else {
-      slide.classList.add('opacity-0', 'pointer-events-none');
-      slide.classList.remove('opacity-100');
+      slide.classList.add('pointer-events-none');
+      gsap.to(slide, { 
+        opacity: 0, 
+        x: -35, 
+        duration: 0.35, 
+        onComplete: () => {
+          gsap.set(slide, { display: 'none' });
+        }
+      });
     }
   });
 
