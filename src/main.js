@@ -493,52 +493,150 @@ function initScrollAnimations() {
   });
 }
 
+
+
 // -------------------------------------------------------------
-// 9. PROJECT FILTERING LOGIC
+// 9. DYNAMIC PROJECTS SLIDER LOGIC (Puma-style)
 // -------------------------------------------------------------
-const filterButtons = document.querySelectorAll('.project-filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
+const slides = document.querySelectorAll('.slide-item');
+const indicatorBtns = document.querySelectorAll('.slider-indicator-btn');
+const prevBtn = document.getElementById('prev-project-btn');
+const nextBtn = document.getElementById('next-project-btn');
+const projectsSection = document.querySelector('.projects-section-container');
+let currentSlideIdx = 0;
+let isAnimating = false;
 
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Reset active button class styles
-    filterButtons.forEach(b => {
-      b.classList.remove('bg-purple-600', 'text-white', 'border-purple-600');
-      b.classList.add('bg-white/5', 'text-slate-300', 'border-white/10');
-    });
+function goToSlide(nextIdx) {
+  if (isAnimating || nextIdx === currentSlideIdx) return;
+  isAnimating = true;
 
-    // Make clicked button primary style
-    btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
-    btn.classList.remove('bg-white/5', 'text-slate-300', 'border-white/10');
+  const currentSlide = slides[currentSlideIdx];
+  const nextSlide = slides[nextIdx];
+  const nextBgColor = nextSlide.getAttribute('data-bg');
 
-    const filterVal = btn.getAttribute('data-filter');
+  // Update section background color
+  if (projectsSection && nextBgColor) {
+    projectsSection.style.backgroundColor = nextBgColor;
+  }
 
-    projectCards.forEach(card => {
-      const cardCategory = card.getAttribute('data-category');
-      if (filterVal === 'all' || cardCategory === filterVal) {
-        card.style.display = 'flex';
-        if (gsap) {
-          gsap.fromTo(card, {
-            scale: 0.92,
-            opacity: 0
-          }, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            ease: 'power2.out'
-          });
-        }
-      } else {
-        card.style.display = 'none';
+  // Update indicators
+  indicatorBtns.forEach((btn, idx) => {
+    if (idx === nextIdx) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+
+  // Prepare next slide position before animating
+  nextSlide.classList.add('active');
+  
+  if (gsap) {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        currentSlide.classList.remove('active');
+        currentSlideIdx = nextIdx;
+        isAnimating = false;
+        if (ScrollTrigger) ScrollTrigger.refresh();
       }
     });
 
-    // Refresh ScrollTrigger calculations
-    if (ScrollTrigger) {
-      ScrollTrigger.refresh();
-    }
+    // Determine slide direction
+    const isNext = nextIdx > currentSlideIdx;
+    const slideDirectionMultiplier = isNext ? 1 : -1;
+
+    // Slide out current slide details
+    tl.to(currentSlide.querySelector('.slide-details-left'), {
+      x: -100 * slideDirectionMultiplier,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.in'
+    }, 0)
+    .to(currentSlide.querySelector('.slide-image-wrapper'), {
+      scale: 0.8,
+      rotation: -10 * slideDirectionMultiplier,
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.in'
+    }, 0)
+    .to(currentSlide.querySelector('.slide-details-right'), {
+      x: 100 * slideDirectionMultiplier,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.in'
+    }, 0)
+    .to(currentSlide.querySelector('.giant-bg-text'), {
+      opacity: 0,
+      y: -50,
+      duration: 0.4,
+      ease: 'power2.in'
+    }, 0);
+
+    // Slide in next slide details
+    tl.fromTo(nextSlide.querySelector('.slide-details-left'), {
+      x: 100 * slideDirectionMultiplier,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    }, 0.3)
+    .fromTo(nextSlide.querySelector('.slide-image-wrapper'), {
+      scale: 0.5,
+      rotation: 20 * slideDirectionMultiplier,
+      opacity: 0
+    }, {
+      scale: 1,
+      rotation: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'back.out(1.2)'
+    }, 0.2)
+    .fromTo(nextSlide.querySelector('.slide-details-right'), {
+      x: -100 * slideDirectionMultiplier,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    }, 0.3)
+    .fromTo(nextSlide.querySelector('.giant-bg-text'), {
+      opacity: 0,
+      y: 50
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, 0.2);
+
+  } else {
+    // Fallback if GSAP is not available
+    currentSlide.classList.remove('active');
+    nextSlide.classList.add('active');
+    currentSlideIdx = nextIdx;
+    isAnimating = false;
+  }
+}
+
+if (prevBtn && nextBtn) {
+  prevBtn.addEventListener('click', () => {
+    let nextIdx = currentSlideIdx - 1;
+    if (nextIdx < 0) nextIdx = slides.length - 1;
+    goToSlide(nextIdx);
   });
-});
+
+  nextBtn.addEventListener('click', () => {
+    let nextIdx = (currentSlideIdx + 1) % slides.length;
+    goToSlide(nextIdx);
+  });
+
+  indicatorBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetIdx = parseInt(btn.getAttribute('data-slide'), 10);
+      goToSlide(targetIdx);
+    });
+  });
+}
 
 // -------------------------------------------------------------
 // 10. PROJECT DETAILED MODAL DATA & ACTION POPUPS
