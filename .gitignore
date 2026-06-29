@@ -34,3 +34,5 @@ Thumbs.db
 lh-report.json
 tmp/
 
+.vercel
+.env*

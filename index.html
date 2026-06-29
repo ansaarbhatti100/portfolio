@@ -610,209 +610,258 @@
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Premium Projects Showcase</h2>
         </div>
 
-        <!-- Slider Wrapper -->
+                <!-- Slider Wrapper -->
         <div class="slider-wrapper">
           
           <!-- Slide 1: Hospital Management Website -->
-          <div class="slide-item active flex flex-col lg:flex-row items-center gap-12" data-index="0" data-bg="#3b0764">
+          <div class="slide-item active grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[500px] relative px-4" data-index="0" data-bg="#3b0764">
             <!-- Giant Outline text in background -->
-            <div class="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-12 pointer-events-none z-0">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
               <span class="giant-bg-text select-none">CLINIC</span>
             </div>
 
             <!-- Slide Left (Details) -->
-            <div class="w-full lg:w-5/12 space-y-6 z-10 slide-details-left text-center lg:text-left">
-              <span class="bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full text-purple-300 text-xs font-semibold uppercase tracking-wider">Custom Web</span>
-              <h3 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight font-display">Hospital Management Website</h3>
-              <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 font-mono">$500+ Est. Value</div>
+            <div class="col-span-12 lg:col-span-4 space-y-6 z-10 slide-details-left text-center lg:text-left flex flex-col justify-center">
+              <div>
+                <span class="bg-purple-500/10 border border-purple-500/20 px-3.5 py-1.5 rounded-full text-purple-300 text-xs font-semibold uppercase tracking-wider">Custom Web</span>
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-black text-white leading-tight font-display tracking-tight">Hospital Management</h3>
+              <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-mono">$500+ Est. Value</div>
               
               <!-- Tech Tags -->
               <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-2">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">PHP</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">MySQL</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Tailwind CSS</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">GSAP</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">PHP</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">MySQL</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Tailwind CSS</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">GSAP</span>
               </div>
             </div>
 
-            <!-- Slide Center (Floating Mockup) -->
-            <div class="w-full lg:w-4/12 flex justify-center items-center z-10 slide-image-wrapper">
-              <div class="relative w-64 h-64 sm:w-80 sm:h-80 group max-w-full">
-                <!-- Inner card border wrapper -->
-                <div class="absolute inset-0 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-md flex items-center justify-center transform hover:scale-105 transition-transform duration-500 shadow-2xl">
-                  <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative">
-                    <img src="/assets/project1.jpg" alt="Hospital Management Website" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <!-- Slide Center (3D Browser Mockup) -->
+            <div class="col-span-12 lg:col-span-5 flex justify-center items-center z-20 slide-image-wrapper py-6">
+              <div class="browser-mockup-frame w-full max-w-[420px] relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-3xl blur-2xl opacity-40"></div>
+                <div class="relative bg-slate-950 border border-white/10 rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
+                  <!-- Browser Header -->
+                  <div class="flex items-center px-4 py-3 bg-slate-900 border-b border-white/5 space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    <div class="w-full bg-slate-950/50 border border-white/5 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://ansaar.dev/hospital-management</div>
+                  </div>
+                  <!-- Browser Body -->
+                  <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
+                    <img src="/assets/project1.jpg" alt="Hospital Management Website" class="w-full h-full object-cover">
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Slide Right (Description and Buttons) -->
-            <div class="w-full lg:w-3/12 space-y-6 z-10 slide-details-right text-center lg:text-left slide-glass-card">
-              <p class="text-slate-300 text-sm leading-relaxed">
-                A secure web application featuring real-time doctor appointment bookings, patient histories, dynamic prescription databases, invoicing systems, and administrative telemetry portals.
-              </p>
-              <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full col-span-2">
-                <a href="#" role="button" aria-label="View live demo of Hospital Management Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all duration-300 flex items-center justify-center w-full">
-                  <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
-                </a>
-                <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project1" aria-label="View details of Hospital Management Website">
-                  <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
-                </button>
+            <!-- Slide Right (Description & CTAs) -->
+            <div class="col-span-12 lg:col-span-3 space-y-6 z-10 slide-details-right text-center lg:text-left flex flex-col justify-center">
+              <div class="slide-glass-card">
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                  A secure web application featuring real-time doctor appointment bookings, patient histories, dynamic prescription databases, invoicing systems, and administrative telemetry portals.
+                </p>
+                <div class="flex flex-col gap-3">
+                  <a href="#" role="button" aria-label="View live demo of Hospital Management Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(147,51,234,0.3)] transition-all duration-300 flex items-center justify-center w-full">
+                    <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
+                  </a>
+                  <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project1" aria-label="View details of Hospital Management Website">
+                    <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Slide 2: Leather eCommerce Store -->
-          <div class="slide-item flex flex-col lg:flex-row items-center gap-12" data-index="1" data-bg="#451a03">
+          <div class="slide-item grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[500px] relative px-4" data-index="1" data-bg="#451a03">
             <!-- Giant Outline text in background -->
-            <div class="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-12 pointer-events-none z-0">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
               <span class="giant-bg-text select-none">LEATHER</span>
             </div>
 
             <!-- Slide Left (Details) -->
-            <div class="w-full lg:w-5/12 space-y-6 z-10 slide-details-left text-center lg:text-left">
-              <span class="bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full text-blue-300 text-xs font-semibold uppercase tracking-wider">WordPress</span>
-              <h3 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight font-display">Leather eCommerce Store</h3>
-              <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 font-mono">$1,200+ Est. Value</div>
+            <div class="col-span-12 lg:col-span-4 space-y-6 z-10 slide-details-left text-center lg:text-left flex flex-col justify-center">
+              <div>
+                <span class="bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full text-blue-300 text-xs font-semibold uppercase tracking-wider">WordPress</span>
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-black text-white leading-tight font-display tracking-tight">Leather eCommerce</h3>
+              <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 font-mono">$1,200+ Est. Value</div>
               
               <!-- Tech Tags -->
               <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-2">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">WordPress</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">WooCommerce</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Elementor Pro</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Stripe</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">WordPress</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">WooCommerce</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Elementor Pro</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Stripe</span>
               </div>
             </div>
 
-            <!-- Slide Center (Floating Mockup) -->
-            <div class="w-full lg:w-4/12 flex justify-center items-center z-10 slide-image-wrapper">
-              <div class="relative w-64 h-64 sm:w-80 sm:h-80 group max-w-full">
-                <div class="absolute inset-0 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-md flex items-center justify-center transform hover:scale-105 transition-transform duration-500 shadow-2xl">
-                  <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative">
-                    <img src="/assets/project2.jpg" alt="Leather eCommerce Store" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <!-- Slide Center (3D Browser Mockup) -->
+            <div class="col-span-12 lg:col-span-5 flex justify-center items-center z-20 slide-image-wrapper py-6">
+              <div class="browser-mockup-frame w-full max-w-[420px] relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-amber-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-40"></div>
+                <div class="relative bg-slate-950 border border-white/10 rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
+                  <!-- Browser Header -->
+                  <div class="flex items-center px-4 py-3 bg-slate-900 border-b border-white/5 space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    <div class="w-full bg-slate-950/50 border border-white/5 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://leathercraft-store.com</div>
+                  </div>
+                  <!-- Browser Body -->
+                  <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
+                    <img src="/assets/project2.jpg" alt="Leather eCommerce Store" class="w-full h-full object-cover">
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Slide Right (Description and Buttons) -->
-            <div class="w-full lg:w-3/12 space-y-6 z-10 slide-details-right text-center lg:text-left slide-glass-card">
-              <p class="text-slate-300 text-sm leading-relaxed">
-                Premium retail eCommerce store constructed on WooCommerce with highly customizable product attributes, sizing calculators, responsive category filter sidebars, and direct stripe processing.
-              </p>
-              <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full">
-                <a href="#" role="button" aria-label="View live demo of Leather eCommerce Store" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center w-full">
-                  <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
-                </a>
-                <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project2" aria-label="View details of Leather eCommerce Store">
-                  <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
-                </button>
+            <!-- Slide Right (Description & CTAs) -->
+            <div class="col-span-12 lg:col-span-3 space-y-6 z-10 slide-details-right text-center lg:text-left flex flex-col justify-center">
+              <div class="slide-glass-card">
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                  Premium retail eCommerce store constructed on WooCommerce with highly customizable product attributes, sizing calculators, responsive category filter sidebars, and direct stripe processing.
+                </p>
+                <div class="flex flex-col gap-3">
+                  <a href="#" role="button" aria-label="View live demo of Leather eCommerce Store" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center w-full">
+                    <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
+                  </a>
+                  <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project2" aria-label="View details of Leather eCommerce Store">
+                    <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Slide 3: Business Portfolio Website -->
-          <div class="slide-item flex flex-col lg:flex-row items-center gap-12" data-index="2" data-bg="#1e293b">
+          <div class="slide-item grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[500px] relative px-4" data-index="2" data-bg="#1e293b">
             <!-- Giant Outline text in background -->
-            <div class="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-12 pointer-events-none z-0">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
               <span class="giant-bg-text select-none">AGENCY</span>
             </div>
 
             <!-- Slide Left (Details) -->
-            <div class="w-full lg:w-5/12 space-y-6 z-10 slide-details-left text-center lg:text-left">
-              <span class="bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full text-blue-300 text-xs font-semibold uppercase tracking-wider">WordPress</span>
-              <h3 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight font-display">Business Portfolio Website</h3>
-              <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 font-mono">$800+ Est. Value</div>
+            <div class="col-span-12 lg:col-span-4 space-y-6 z-10 slide-details-left text-center lg:text-left flex flex-col justify-center">
+              <div>
+                <span class="bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full text-blue-300 text-xs font-semibold uppercase tracking-wider">WordPress</span>
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-black text-white leading-tight font-display tracking-tight">Business Portfolio</h3>
+              <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 font-mono">$800+ Est. Value</div>
               
               <!-- Tech Tags -->
               <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-2">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">WordPress</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Elementor Pro</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Lottie Animations</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">SEO</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">WordPress</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Elementor Pro</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Lottie Animations</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">SEO</span>
               </div>
             </div>
 
-            <!-- Slide Center (Floating Mockup) -->
-            <div class="w-full lg:w-4/12 flex justify-center items-center z-10 slide-image-wrapper">
-              <div class="relative w-64 h-64 sm:w-80 sm:h-80 group max-w-full">
-                <div class="absolute inset-0 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-md flex items-center justify-center transform hover:scale-105 transition-transform duration-500 shadow-2xl">
-                  <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative">
-                    <img src="/assets/project3.jpg" alt="Business Portfolio Website" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <!-- Slide Center (3D Browser Mockup) -->
+            <div class="col-span-12 lg:col-span-5 flex justify-center items-center z-20 slide-image-wrapper py-6">
+              <div class="browser-mockup-frame w-full max-w-[420px] relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-blue-500/10 to-emerald-500/10 rounded-3xl blur-2xl opacity-40"></div>
+                <div class="relative bg-slate-950 border border-white/10 rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
+                  <!-- Browser Header -->
+                  <div class="flex items-center px-4 py-3 bg-slate-900 border-b border-white/5 space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    <div class="w-full bg-slate-950/50 border border-white/5 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://horizon-agency.com</div>
+                  </div>
+                  <!-- Browser Body -->
+                  <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
+                    <img src="/assets/project3.jpg" alt="Business Portfolio Website" class="w-full h-full object-cover">
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Slide Right (Description and Buttons) -->
-            <div class="w-full lg:w-3/12 space-y-6 z-10 slide-details-right text-center lg:text-left slide-glass-card">
-              <p class="text-slate-300 text-sm leading-relaxed">
-                A sleek corporate agency website displaying advanced landing flows, dynamic project filtering widgets, custom lead analytics integration, and speed optimizations reaching 98+ PageSpeed.
-              </p>
-              <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full">
-                <a href="#" role="button" aria-label="View live demo of Business Portfolio Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(99,102,241,0.3)] transition-all duration-300 flex items-center justify-center w-full">
-                  <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
-                </a>
-                <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project3" aria-label="View details of Business Portfolio Website">
-                  <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
-                </button>
+            <!-- Slide Right (Description & CTAs) -->
+            <div class="col-span-12 lg:col-span-3 space-y-6 z-10 slide-details-right text-center lg:text-left flex flex-col justify-center">
+              <div class="slide-glass-card">
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                  A sleek corporate agency website displaying advanced landing flows, dynamic project filtering widgets, custom lead analytics integration, and speed optimizations reaching 98+ PageSpeed.
+                </p>
+                <div class="flex flex-col gap-3">
+                  <a href="#" role="button" aria-label="View live demo of Business Portfolio Website" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(99,102,241,0.3)] transition-all duration-300 flex items-center justify-center w-full">
+                    <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
+                  </a>
+                  <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project3" aria-label="View details of Business Portfolio Website">
+                    <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Slide 4: Custom WordPress Management System -->
-          <div class="slide-item flex flex-col lg:flex-row items-center gap-12" data-index="3" data-bg="#0f172a">
+          <div class="slide-item grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[500px] relative px-4" data-index="3" data-bg="#0f172a">
             <!-- Giant Outline text in background -->
-            <div class="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-12 pointer-events-none z-0">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
               <span class="giant-bg-text select-none">SYSTEM</span>
             </div>
 
             <!-- Slide Left (Details) -->
-            <div class="w-full lg:w-5/12 space-y-6 z-10 slide-details-left text-center lg:text-left">
-              <span class="bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full text-purple-300 text-xs font-semibold uppercase tracking-wider">Custom Web</span>
-              <h3 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight font-display">WordPress Management System</h3>
-              <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400 font-mono">$1,500+ Est. Value</div>
+            <div class="col-span-12 lg:col-span-4 space-y-6 z-10 slide-details-left text-center lg:text-left flex flex-col justify-center">
+              <div>
+                <span class="bg-purple-500/10 border border-purple-500/20 px-3.5 py-1.5 rounded-full text-purple-300 text-xs font-semibold uppercase tracking-wider">Custom Web</span>
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-black text-white leading-tight font-display tracking-tight">Management System</h3>
+              <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400 font-mono">$1,500+ Est. Value</div>
               
               <!-- Tech Tags -->
               <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-2">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">PHP (Laravel)</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">WP REST API</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Vue.js</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-slate-300">Tailwind</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">PHP (Laravel)</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">WP REST API</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Vue.js</span>
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">Tailwind</span>
               </div>
             </div>
 
-            <!-- Slide Center (Floating Mockup) -->
-            <div class="w-full lg:w-4/12 flex justify-center items-center z-10 slide-image-wrapper">
-              <div class="relative w-64 h-64 sm:w-80 sm:h-80 group max-w-full">
-                <div class="absolute inset-0 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-md flex items-center justify-center transform hover:scale-105 transition-transform duration-500 shadow-2xl">
-                  <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative">
-                    <img src="/assets/project4.jpg" alt="Custom WordPress Management System" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <!-- Slide Center (3D Browser Mockup) -->
+            <div class="col-span-12 lg:col-span-5 flex justify-center items-center z-20 slide-image-wrapper py-6">
+              <div class="browser-mockup-frame w-full max-w-[420px] relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-violet-500/10 to-indigo-500/10 rounded-3xl blur-2xl opacity-40"></div>
+                <div class="relative bg-slate-950 border border-white/10 rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
+                  <!-- Browser Header -->
+                  <div class="flex items-center px-4 py-3 bg-slate-900 border-b border-white/5 space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    <div class="w-full bg-slate-950/50 border border-white/5 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://ansaar.dev/wp-manager</div>
+                  </div>
+                  <!-- Browser Body -->
+                  <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
+                    <img src="/assets/project4.jpg" alt="Custom WordPress Management System" class="w-full h-full object-cover">
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Slide Right (Description and Buttons) -->
-            <div class="w-full lg:w-3/12 space-y-6 z-10 slide-details-right text-center lg:text-left slide-glass-card">
-              <p class="text-slate-300 text-sm leading-relaxed">
-                An advanced multi-site administration dashboard allowing bulk core/plugin installations, centralized database backup, uptime tracking, and real-time site resource usage analytics.
-              </p>
-              <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full">
-                <a href="#" role="button" aria-label="View live demo of Custom WordPress Management System" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all duration-300 flex items-center justify-center w-full">
-                  <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
-                </a>
-                <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project4" aria-label="View details of Custom WordPress Management System">
-                  <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
-                </button>
+            <!-- Slide Right (Description & CTAs) -->
+            <div class="col-span-12 lg:col-span-3 space-y-6 z-10 slide-details-right text-center lg:text-left flex flex-col justify-center">
+              <div class="slide-glass-card">
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                  An advanced multi-site administration dashboard allowing bulk core/plugin installations, centralized database backup, uptime tracking, and real-time site resource usage analytics.
+                </p>
+                <div class="flex flex-col gap-3">
+                  <a href="#" role="button" aria-label="View live demo of Custom WordPress Management System" class="magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all duration-300 flex items-center justify-center w-full">
+                    <i class="fas fa-external-link-alt mr-2 text-xs" aria-hidden="true"></i> Live Demo
+                  </a>
+                  <button class="project-details-btn magnetic-btn px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all duration-300 flex items-center justify-center cursor-pointer w-full" data-project="project4" aria-label="View details of Custom WordPress Management System">
+                    <i class="fas fa-info-circle mr-2 text-xs" aria-hidden="true"></i> Details
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-        </div>
-
-        <!-- Slider Controls (Arrows & Indicators) -->
+        </div>\n\n        <!-- Slider Controls (Arrows & Indicators) -->
         <div class="flex flex-col sm:flex-row justify-between items-center mt-12 gap-6 z-20 relative">
           <!-- Indicators -->
           <div class="flex space-x-2" id="project-slider-indicators">

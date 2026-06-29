@@ -295,17 +295,37 @@ textarea:focus-visible {
   pointer-events: auto;
 }
 
+
+
 .giant-bg-text {
-  font-size: clamp(6rem, 15vw, 18rem);
+  font-size: clamp(8rem, 20vw, 24rem);
   font-weight: 900;
   line-height: 0.8;
   letter-spacing: -0.05em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.045);
   pointer-events: none;
   user-select: none;
   font-family: 'Outfit', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 0;
   text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.01);
+}
+
+/* 3D Browser Mockup Frame styling */
+.browser-mockup-frame {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transform: rotateY(-15deg) rotateX(8deg) rotateZ(-3deg);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.8s ease;
+}
+
+.browser-mockup-frame:hover {
+  transform: rotateY(-4deg) rotateX(3deg) rotateZ(-1deg) scale(1.05);
 }
 
 /* Glass panel inside slider */

@@ -544,7 +544,6 @@ function goToProjectSlide(nextIdx) {
     // Determine slide direction
     const isNext = nextIdx > currentProjectSlideIdx;
     const slideDirectionMultiplier = isNext ? 1 : -1;
-
     // Slide out current slide details
     tl.to(currentSlide.querySelector('.slide-details-left'), {
       x: -100 * slideDirectionMultiplier,
@@ -552,9 +551,10 @@ function goToProjectSlide(nextIdx) {
       duration: 0.4,
       ease: 'power2.in'
     }, 0)
-    .to(currentSlide.querySelector('.slide-image-wrapper'), {
+    .to(currentSlide.querySelector('.browser-mockup-frame'), {
       scale: 0.8,
-      rotation: -10 * slideDirectionMultiplier,
+      rotationY: 45 * slideDirectionMultiplier,
+      rotationX: -15,
       opacity: 0,
       duration: 0.5,
       ease: 'power2.in'
@@ -582,17 +582,20 @@ function goToProjectSlide(nextIdx) {
       duration: 0.6,
       ease: 'power3.out'
     }, 0.3)
-    .fromTo(nextSlide.querySelector('.slide-image-wrapper'), {
+    .fromTo(nextSlide.querySelector('.browser-mockup-frame'), {
       scale: 0.5,
-      rotation: 20 * slideDirectionMultiplier,
+      rotationY: -45 * slideDirectionMultiplier,
+      rotationX: 15,
       opacity: 0
     }, {
       scale: 1,
-      rotation: 0,
+      rotationY: -15,
+      rotationX: 8,
+      rotationZ: -3,
       opacity: 1,
-      duration: 0.8,
-      ease: 'back.out(1.2)'
-    }, 0.2)
+      duration: 0.85,
+      ease: 'back.out(1.1)'
+    }, 0.15)
     .fromTo(nextSlide.querySelector('.slide-details-right'), {
       x: -100 * slideDirectionMultiplier,
       opacity: 0
@@ -611,7 +614,6 @@ function goToProjectSlide(nextIdx) {
       duration: 0.8,
       ease: 'power3.out'
     }, 0.2);
-
   } else {
     // Fallback if GSAP is not available
     currentSlide.classList.remove('active');
