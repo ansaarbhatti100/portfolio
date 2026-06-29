@@ -1032,7 +1032,7 @@ Important guidelines:
 - Always speak in a friendly, conversational tone.
 `;
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "3FoW7W2cJ7ikZCsUhzlMXJ6Kjlc_k5fM1YtjjyVez8eVFxJr";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
 
 if (chatbotToggle && chatbotPanel) {
   chatbotToggle.addEventListener('click', toggleChatbot);
@@ -1119,7 +1119,7 @@ if (chatbotToggle && chatbotPanel) {
     });
 
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`;
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
