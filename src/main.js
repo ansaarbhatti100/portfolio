@@ -498,20 +498,23 @@ function initScrollAnimations() {
 // -------------------------------------------------------------
 // 9. DYNAMIC PROJECTS SLIDER LOGIC (Puma-style)
 // -------------------------------------------------------------
-const slides = document.querySelectorAll('.slide-item');
+// -------------------------------------------------------------
+// 9. DYNAMIC PROJECTS SLIDER LOGIC (Puma-style)
+// -------------------------------------------------------------
+const projectSlides = document.querySelectorAll('.slide-item');
 const indicatorBtns = document.querySelectorAll('.slider-indicator-btn');
-const prevBtn = document.getElementById('prev-project-btn');
-const nextBtn = document.getElementById('next-project-btn');
+const prevProjectBtn = document.getElementById('prev-project-btn');
+const nextProjectBtn = document.getElementById('next-project-btn');
 const projectsSection = document.querySelector('.projects-section-container');
-let currentSlideIdx = 0;
-let isAnimating = false;
+let currentProjectSlideIdx = 0;
+let isProjectAnimating = false;
 
-function goToSlide(nextIdx) {
-  if (isAnimating || nextIdx === currentSlideIdx) return;
-  isAnimating = true;
+function goToProjectSlide(nextIdx) {
+  if (isProjectAnimating || nextIdx === currentProjectSlideIdx) return;
+  isProjectAnimating = true;
 
-  const currentSlide = slides[currentSlideIdx];
-  const nextSlide = slides[nextIdx];
+  const currentSlide = projectSlides[currentProjectSlideIdx];
+  const nextSlide = projectSlides[nextIdx];
   const nextBgColor = nextSlide.getAttribute('data-bg');
 
   // Update section background color
@@ -532,14 +535,14 @@ function goToSlide(nextIdx) {
     const tl = gsap.timeline({
       onComplete: () => {
         currentSlide.classList.remove('active');
-        currentSlideIdx = nextIdx;
-        isAnimating = false;
+        currentProjectSlideIdx = nextIdx;
+        isProjectAnimating = false;
         if (ScrollTrigger) ScrollTrigger.refresh();
       }
     });
 
     // Determine slide direction
-    const isNext = nextIdx > currentSlideIdx;
+    const isNext = nextIdx > currentProjectSlideIdx;
     const slideDirectionMultiplier = isNext ? 1 : -1;
 
     // Slide out current slide details
@@ -613,30 +616,31 @@ function goToSlide(nextIdx) {
     // Fallback if GSAP is not available
     currentSlide.classList.remove('active');
     nextSlide.classList.add('active');
-    currentSlideIdx = nextIdx;
-    isAnimating = false;
+    currentProjectSlideIdx = nextIdx;
+    isProjectAnimating = false;
   }
 }
 
-if (prevBtn && nextBtn) {
-  prevBtn.addEventListener('click', () => {
-    let nextIdx = currentSlideIdx - 1;
-    if (nextIdx < 0) nextIdx = slides.length - 1;
-    goToSlide(nextIdx);
+if (prevProjectBtn && nextProjectBtn) {
+  prevProjectBtn.addEventListener('click', () => {
+    let nextIdx = currentProjectSlideIdx - 1;
+    if (nextIdx < 0) nextIdx = projectSlides.length - 1;
+    goToProjectSlide(nextIdx);
   });
 
-  nextBtn.addEventListener('click', () => {
-    let nextIdx = (currentSlideIdx + 1) % slides.length;
-    goToSlide(nextIdx);
+  nextProjectBtn.addEventListener('click', () => {
+    let nextIdx = (currentProjectSlideIdx + 1) % projectSlides.length;
+    goToProjectSlide(nextIdx);
   });
 
   indicatorBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetIdx = parseInt(btn.getAttribute('data-slide'), 10);
-      goToSlide(targetIdx);
+      goToProjectSlide(targetIdx);
     });
   });
 }
+
 
 // -------------------------------------------------------------
 // 10. PROJECT DETAILED MODAL DATA & ACTION POPUPS
