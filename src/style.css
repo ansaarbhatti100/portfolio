@@ -201,3 +201,27 @@ textarea:focus-visible {
   animation: profile-card-float 6s ease-in-out infinite;
 }
 
+/* Premium Sidebar Mobile Drawer Transition overrides */
+#mobile-menu.translate-x-full {
+  transform: none !important;
+}
+
+#mobile-menu {
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+}
+
+#mobile-menu.visible {
+  opacity: 1;
+}
+
+#mobile-menu > div {
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mobile-menu.visible > div {
+  transform: translateX(0);
+}
+
+
