@@ -1000,9 +1000,59 @@
   </footer>
 
   <!-- Scroll to Top Button -->
-  <button id="scroll-to-top-btn" class="fixed bottom-8 right-8 w-12 h-12 bg-purple-600/80 hover:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-md border border-white/10 opacity-0 pointer-events-none invisible translate-y-4 transition-all duration-300 cursor-pointer z-40 hover:-translate-y-1" aria-label="Scroll to top">
+  <button id="scroll-to-top-btn" class="fixed bottom-24 right-8 w-12 h-12 bg-purple-600/80 hover:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-md border border-white/10 opacity-0 pointer-events-none invisible translate-y-4 transition-all duration-300 cursor-pointer z-40 hover:-translate-y-1" aria-label="Scroll to top">
     <i class="fas fa-arrow-up text-sm" aria-hidden="true"></i>
   </button>
+
+  <!-- AI Chatbot Widget -->
+  <div id="ai-chatbot" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- Chatbot Panel -->
+    <div id="chatbot-panel" class="hidden w-[380px] max-w-[90vw] h-[480px] bg-[#0c0b16]/95 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl flex-col overflow-hidden mb-4 transform scale-95 opacity-0 origin-bottom-right">
+      <!-- Header -->
+      <div class="p-4 bg-white/5 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-purple-500 to-blue-500">
+            <img src="/assets/profile.jpg" alt="Ansaar Bhatti" class="w-full h-full rounded-full object-cover">
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#0c0b16] rounded-full"></span>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white leading-tight">Ansaar's Assistant</h4>
+            <span class="text-[10px] text-green-400 font-semibold tracking-wider uppercase">AI Agent Online</span>
+          </div>
+        </div>
+        <button id="chatbot-close" class="text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Close Chat">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Messages Box -->
+      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-4 scrollbar-thin">
+        <!-- Initial Message -->
+        <div class="flex items-start space-x-2.5">
+          <div class="w-7 h-7 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-bold flex-shrink-0">AI</div>
+          <div class="bg-white/5 border border-white/10 text-slate-200 text-sm p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-md">
+            Hi! I am Ansaar's AI Assistant. How can I help you today? Ask me anything in any language!
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Box -->
+      <div class="p-3 bg-[#080710]/50 border-t border-white/10 flex items-center space-x-2">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 focus:border-purple-500/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none placeholder-slate-500 transition-colors">
+        <button id="chatbot-send" class="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer" aria-label="Send Message">
+          <i class="fa-solid fa-paper-plane text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle" class="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-600 to-blue-500 text-white flex items-center justify-center shadow-[0_4px_25px_rgba(147,51,234,0.4)] hover:scale-105 transition-all duration-300 cursor-pointer focus:outline-none relative" aria-label="Open Chatbot">
+      <i class="fa-solid fa-comments text-2xl" id="chatbot-icon-open"></i>
+      <i class="fa-solid fa-xmark text-2xl hidden" id="chatbot-icon-close"></i>
+      <!-- Pulsing Indicator -->
+      <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#080710] animate-pulse"></span>
+    </button>
+  </div>
 
   <!-- Project Details Modal (Reusable container) -->
   <div id="project-modal" class="fixed inset-0 bg-[#080710]/80 backdrop-blur-md z-[99999] opacity-0 pointer-events-none invisible transition-all duration-300 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">

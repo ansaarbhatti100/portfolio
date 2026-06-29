@@ -870,3 +870,203 @@ if (scrollToTopBtn) {
     });
   });
 }
+
+// -------------------------------------------------------------
+// 14. AI CHATBOT WIDGET LOGIC
+// -------------------------------------------------------------
+const chatbotToggle = document.getElementById('chatbot-toggle');
+const chatbotPanel = document.getElementById('chatbot-panel');
+const chatbotClose = document.getElementById('chatbot-close');
+const chatbotMessages = document.getElementById('chatbot-messages');
+const chatbotInput = document.getElementById('chatbot-input');
+const chatbotSend = document.getElementById('chatbot-send');
+const chatbotIconOpen = document.getElementById('chatbot-icon-open');
+const chatbotIconClose = document.getElementById('chatbot-icon-close');
+
+let chatHistory = [];
+
+const SYSTEM_PROMPT = `
+You are Ansaar Bhatti's virtual AI assistant. Your goal is to represent him professionally and answer client queries about him in a helpful, conversational manner.
+Respond in the language the user speaks (e.g., Urdu, English, Hindi, German, etc.). Keep answers concise and polite.
+
+Here is the exact information about Ansaar Bhatti:
+- Name: Ansaar Bhatti
+- Title: Full Stack Web Developer & WordPress Expert
+- Experience: 3+ Years of professional experience in crafting high-speed, secure, and responsive web solutions.
+- Completed Projects: 150+ successfully completed projects.
+- Happy Clients: 99% satisfaction rate.
+- Support: 24/7 availability for clients.
+- Primary Skills:
+  * WordPress Custom Theme & Plugin Development (98% proficiency)
+  * Elementor Pro & Page Builders (96% proficiency)
+  * HTML5 Semantic Architecture (95% proficiency)
+  * Website Server Management (Linux, cPanel, SSH, Security) (94% proficiency)
+  * CSS3 & Tailwind CSS Styling (92% proficiency)
+  * JavaScript ES6+ & GSAP Animations (88% proficiency)
+  * PHP Development (85% proficiency)
+  * MySQL Database Design (82% proficiency)
+- Services Offered:
+  * WordPress Development (Custom themes, hooks, plugins)
+  * eCommerce Stores (WooCommerce, stripe, checkout filters)
+  * Business & Corporate Websites (visual portfolios, fast landing)
+  * Landing Pages (High-converting, optimized page speed)
+  * Website Maintenance (Database optimization, security patches, backups)
+  * Custom Web Solutions (custom dashboards, CRM sync, booking APIs)
+- Recent Highlight Projects:
+  * Hospital Management Website (PHP, MySQL, Tailwind, GSAP) - Features booking, patient histories, invoicing.
+  * Leather eCommerce Store (WooCommerce, Elementor Pro, Stripe) - Features product attributes, sizing calculators.
+  * Business Portfolio Website (WordPress, Elementor Pro, Lottie) - Features landing flows, 98+ PageSpeed.
+  * Custom WordPress Management System (PHP/Laravel, WP API, Vue.js, Tailwind) - Centralized database backup, resource telemetry.
+- Contact Details:
+  * Email: ansaar.bhatti100@gmail.com
+  * WhatsApp: +923401350380 (Direct WhatsApp link: https://wa.me/923401350380)
+  * CV / Resume download is available on the website at "/assets/cv.pdf"
+  * Clients can hire him directly using the "Hire Me" buttons on the page.
+
+Important guidelines:
+- If a client asks for contact information, always provide the WhatsApp link and Email.
+- If asked about projects, briefly explain the ones listed above.
+- If asked about anything outside this context (e.g., general knowledge, personal questions unrelated to work), politely state: "I am Ansaar's AI assistant, so I only answer questions related to his portfolio. For other queries or specific project discussions, you can reach out to him directly on WhatsApp: https://wa.me/923401350380"
+- Always speak in a friendly, conversational tone.
+`;
+
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "3FoW7W2cJ7ikZCsUhzlMXJ6Kjlc_k5fM1YtjjyVez8eVFxJr";
+
+if (chatbotToggle && chatbotPanel) {
+  chatbotToggle.addEventListener('click', toggleChatbot);
+  chatbotClose.addEventListener('click', toggleChatbot);
+
+  function toggleChatbot() {
+    const isActive = chatbotPanel.classList.contains('active');
+    if (isActive) {
+      chatbotPanel.classList.remove('active');
+      chatbotIconOpen.classList.remove('hidden');
+      chatbotIconClose.classList.add('hidden');
+      setTimeout(() => chatbotPanel.classList.add('hidden'), 300);
+    } else {
+      chatbotPanel.classList.remove('hidden');
+      setTimeout(() => {
+        chatbotPanel.classList.add('active');
+        chatbotIconOpen.classList.add('hidden');
+        chatbotIconClose.classList.remove('hidden');
+        chatbotInput.focus();
+      }, 50);
+    }
+  }
+
+  chatbotSend.addEventListener('click', handleSendMessage);
+  chatbotInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSendMessage();
+  });
+
+  async function handleSendMessage() {
+    const text = chatbotInput.value.trim();
+    if (!text) return;
+
+    // Render User Message
+    appendMessage(text, 'user');
+    chatbotInput.value = '';
+
+    // Render Loading Indicator
+    const loaderId = appendMessage('AI is typing...', 'bot', true);
+
+    // Call Gemini API
+    const reply = await callGeminiAPI(text);
+
+    // Remove Loading Indicator and Render Reply
+    removeLoader(loaderId);
+    appendMessage(reply, 'bot');
+  }
+
+  function appendMessage(text, sender, isLoader = false) {
+    const msgDiv = document.createElement('div');
+    const msgId = 'msg-' + Date.now();
+    msgDiv.id = msgId;
+
+    if (sender === 'user') {
+      msgDiv.className = 'flex items-start justify-end space-x-2.5';
+      msgDiv.innerHTML = `
+        <div class="user-msg text-white text-sm p-3 rounded-2xl rounded-tr-none max-w-[80%] shadow-md whitespace-pre-wrap">
+          ${escapeHTML(text)}
+        </div>
+      `;
+    } else {
+      msgDiv.className = 'flex items-start space-x-2.5';
+      msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-bold flex-shrink-0">AI</div>
+        <div class="${isLoader ? 'animate-pulse text-slate-400' : 'bot-msg text-slate-200'} text-sm p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-md whitespace-pre-wrap">
+          ${isLoader ? text : formatMarkdown(text)}
+        </div>
+      `;
+    }
+
+    chatbotMessages.appendChild(msgDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    return msgId;
+  }
+
+  function removeLoader(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  async function callGeminiAPI(userQuery) {
+    chatHistory.push({
+      role: 'user',
+      parts: [{ text: userQuery }]
+    });
+
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [{ text: SYSTEM_PROMPT }]
+          },
+          contents: chatHistory
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        console.error("Gemini API Error:", data.error);
+        chatHistory.pop(); // Remove the last message from history if it failed
+        return "I'm sorry, I'm experiencing connection issues. Please try again later or reach out to Ansaar on WhatsApp: https://wa.me/923401350380";
+      }
+
+      const replyText = data.candidates[0].content.parts[0].text;
+      
+      chatHistory.push({
+        role: 'model',
+        parts: [{ text: replyText }]
+      });
+
+      return replyText;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      chatHistory.pop();
+      return "Unable to connect. Please message Ansaar on WhatsApp: https://wa.me/923401350380";
+    }
+  }
+
+  function escapeHTML(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function formatMarkdown(text) {
+    // Simple bolding and link formatting
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:underline">$1</a>');
+  }
+}
+
