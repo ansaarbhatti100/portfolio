@@ -1,352 +1,435 @@
-/**
- * Modern Micro-Interactions & UI Features
- * - 3D Card Tilt with Cursor Spotlight
- * - Typing Effect
- * - Counters
- * - Project Modal
- * - Testimonial Slider
- * - AI Assistant Simulation
- */
+import { PORTFOLIO_DATA } from './portfolio-data.js';
 
 export function initInteractions() {
-  // 1. Mouse Spotlight & 3D Tilt for Cards
-  const cards = document.querySelectorAll('.spotlight-card');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  // 1. Theme Switcher (Dark / Light Mode)
+  const themeToggle = document.getElementById('theme-toggle');
+  const currentTheme = localStorage.getItem('theme') || 'dark';
 
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-
-      // 3D Tilt
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -7;
-      const rotateY = ((x - centerX) / centerX) * 7;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    });
-  });
-
-  // 2. Typing Animation
-  const typingElement = document.getElementById('typing-text');
-  if (typingElement) {
-    const words = [
-      'WordPress Systems',
-      'Full Stack Applications',
-      'High-Speed Solutions',
-      'Custom Web Platforms'
-    ];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typeSpeed = 100;
-
-    function type() {
-      const currentWord = words[wordIndex];
-      if (isDeleting) {
-        typingElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-        typeSpeed = 50;
-      } else {
-        typingElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-        typeSpeed = 100;
-      }
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        isDeleting = true;
-        typeSpeed = 2000; // Pause at end of word
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before typing new word
-      }
-
-      setTimeout(type, typeSpeed);
-    }
-
-    type();
+  if (currentTheme === 'light') {
+    document.body.classList.add('light-theme');
+    updateThemeIcon(true);
   }
 
-  // 3. Stats Counter Animation on Scroll
-  const counters = document.querySelectorAll('.counter-value');
-  let animated = false;
-
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        counters.forEach(counter => {
-          const target = +counter.getAttribute('data-target');
-          const duration = 1500;
-          const step = Math.max(1, Math.floor(target / (duration / 16)));
-          let count = 0;
-
-          const timer = setInterval(() => {
-            count += step;
-            if (count >= target) {
-              counter.textContent = target;
-              clearInterval(timer);
-            } else {
-              counter.textContent = count;
-            }
-          }, 16);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  const statsSection = document.getElementById('about');
-  if (statsSection) countObserver.observe(statsSection);
-
-  // 4. Testimonials Slider
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('#testimonial-dots button');
-  const prevBtn = document.getElementById('prev-testimonial-btn');
-  const nextBtn = document.getElementById('next-testimonial-btn');
-  let currentSlide = 0;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      if (i === index) {
-        slide.classList.add('opacity-100', 'translate-x-0', 'pointer-events-auto');
-        slide.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4', 'translate-x-4');
-      } else {
-        slide.classList.remove('opacity-100', 'translate-x-0', 'pointer-events-auto');
-        slide.classList.add('opacity-0', 'pointer-events-none');
-      }
-    });
-
-    dots.forEach((dot, i) => {
-      const dotInner = dot.querySelector('span');
-      if (dotInner) {
-        if (i === index) {
-          dotInner.className = 'w-6 h-2 rounded-full bg-purple-500 transition-all duration-300';
-        } else {
-          dotInner.className = 'w-2 h-2 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-300';
-        }
-      }
-    });
-    currentSlide = index;
-  }
-
-  if (slides.length > 0) {
-    showSlide(0);
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        let next = (currentSlide + 1) % slides.length;
-        showSlide(next);
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        let prev = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prev);
-      });
-    }
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => showSlide(i));
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light-theme');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemeIcon(isLight);
     });
   }
 
-  // 5. Project Details Modal Data
-  const projectDetails = {
-    project1: {
-      title: "Hospital Management",
-      category: "Custom Web Application",
-      value: "$500+ Est. Value",
-      image: "/assets/project1.jpg",
-      tags: ["PHP", "MySQL", "Tailwind CSS", "GSAP"],
-      desc: "A secure web application featuring real-time doctor appointment bookings, patient histories, dynamic prescription databases, invoicing systems, and administrative telemetry portals.",
-      liveUrl: "#"
-    },
-    project2: {
-      title: "Leather eCommerce",
-      category: "WordPress & WooCommerce",
-      value: "$1,200+ Est. Value",
-      image: "/assets/project2.jpg",
-      tags: ["WordPress", "WooCommerce", "Elementor Pro", "Stripe"],
-      desc: "Premium retail eCommerce store constructed on WooCommerce with highly customizable product attributes, sizing calculators, responsive category filter sidebars, and direct stripe processing.",
-      liveUrl: "https://leathercraft-store.com"
-    },
-    project3: {
-      title: "Business Portfolio",
-      category: "WordPress Agency",
-      value: "$800+ Est. Value",
-      image: "/assets/project3.jpg",
-      tags: ["WordPress", "Elementor Pro", "Lottie Animations", "SEO"],
-      desc: "A sleek corporate agency website displaying advanced landing flows, dynamic project filtering widgets, custom lead analytics integration, and speed optimizations reaching 98+ PageSpeed.",
-      liveUrl: "https://horizon-agency.com"
-    },
-    project4: {
-      title: "Management System",
-      category: "Custom Web Platform",
-      value: "$1,500+ Est. Value",
-      image: "/assets/project4.jpg",
-      tags: ["PHP (Laravel)", "WP REST API", "Vue.js", "Tailwind"],
-      desc: "An advanced multi-site administration dashboard allowing bulk core/plugin installations, centralized database backup, uptime tracking, and real-time site resource usage analytics.",
-      liveUrl: "https://ansaar.dev/wp-manager"
-    }
-  };
-
-  const modal = document.getElementById('project-modal');
-  const modalContent = document.getElementById('modal-content');
-  const modalClose = document.getElementById('modal-close-btn');
-
-  document.querySelectorAll('.project-details-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const projId = btn.getAttribute('data-project');
-      const data = projectDetails[projId];
-      if (!data || !modal || !modalContent) return;
-
-      modalContent.innerHTML = `
-        <div class="rounded-2xl overflow-hidden border border-white/10 max-h-[350px]">
-          <img src="${data.image}" alt="${data.title}" class="w-full h-full object-cover">
-        </div>
-        <div class="space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span class="text-xs uppercase font-mono text-purple-400 tracking-wider">${data.category}</span>
-              <h3 class="text-2xl sm:text-3xl font-bold text-white font-display">${data.title}</h3>
-            </div>
-            <span class="px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-mono font-bold text-sm">${data.value}</span>
-          </div>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${data.desc}</p>
-          <div class="flex flex-wrap gap-2 pt-2">
-            ${data.tags.map(t => `<span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs text-slate-300 font-mono">${t}</span>`).join('')}
-          </div>
-          <div class="pt-4 flex gap-4">
-            <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm py-2.5 px-6">
-              <span>View Live Demo</span> <i class="fas fa-external-link-alt text-xs"></i>
-            </a>
-          </div>
-        </div>
-      `;
-
-      modal.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
-      modal.classList.add('opacity-100', 'visible', 'pointer-events-auto');
-    });
-  });
-
-  if (modalClose && modal) {
-    modalClose.addEventListener('click', () => {
-      modal.classList.add('opacity-0', 'invisible', 'pointer-events-none');
-      modal.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.add('opacity-0', 'invisible', 'pointer-events-none');
-        modal.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
-      }
-    });
+  function updateThemeIcon(isLight) {
+    if (!themeToggle) return;
+    themeToggle.innerHTML = isLight 
+      ? '<i class="fa-solid fa-moon text-sm"></i>' 
+      : '<i class="fa-solid fa-sun text-sm"></i>';
   }
 
-  // 6. AI Assistant Widget Simulation
-  const chatbotToggle = document.getElementById('chatbot-toggle');
-  const chatbotPanel = document.getElementById('chatbot-panel');
-  const chatbotClose = document.getElementById('chatbot-close');
-  const chatbotSend = document.getElementById('chatbot-send');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotMessages = document.getElementById('chatbot-messages');
+  // 2. Scroll Progress Bar & Compact Header & Back to Top
+  const scrollProgressBar = document.getElementById('scroll-progress');
+  const header = document.getElementById('navbar');
+  const backToTopBtn = document.getElementById('back-to-top-btn');
 
-  if (chatbotToggle && chatbotPanel) {
-    chatbotToggle.addEventListener('click', () => {
-      const isClosed = chatbotPanel.classList.contains('hidden');
-      if (isClosed) {
-        chatbotPanel.classList.remove('hidden');
-        setTimeout(() => {
-          chatbotPanel.classList.remove('scale-95', 'opacity-0');
-          chatbotPanel.classList.add('scale-100', 'opacity-100');
-        }, 10);
-      } else {
-        chatbotPanel.classList.add('scale-95', 'opacity-0');
-        chatbotPanel.classList.remove('scale-100', 'opacity-100');
-        setTimeout(() => chatbotPanel.classList.add('hidden'), 200);
-      }
-    });
-
-    if (chatbotClose) {
-      chatbotClose.addEventListener('click', () => {
-        chatbotPanel.classList.add('scale-95', 'opacity-0');
-        chatbotPanel.classList.remove('scale-100', 'opacity-100');
-        setTimeout(() => chatbotPanel.classList.add('hidden'), 200);
-      });
-    }
-
-    const handleSendMessage = () => {
-      const text = chatbotInput.value.trim();
-      if (!text) return;
-
-      // Append User message
-      const userMsg = document.createElement('div');
-      userMsg.className = 'flex items-start justify-end space-x-2.5';
-      userMsg.innerHTML = `
-        <div class="bg-purple-600/30 border border-purple-500/40 text-slate-100 text-sm p-3 rounded-2xl rounded-tr-none max-w-[80%]">
-          ${text}
-        </div>
-      `;
-      chatbotMessages.appendChild(userMsg);
-      chatbotInput.value = '';
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-      // Simulated Response
-      setTimeout(() => {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'flex items-start space-x-2.5';
-        botMsg.innerHTML = `
-          <div class="w-7 h-7 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-bold flex-shrink-0">AI</div>
-          <div class="bg-white/5 border border-white/10 text-slate-200 text-sm p-3 rounded-2xl rounded-tl-none max-w-[80%]">
-            Thanks for reaching out! You can contact Ansaar directly on WhatsApp at <strong>0340-1350380</strong> or email <strong>ansaar.bhatti100@gmail.com</strong>.
-          </div>
-        `;
-        chatbotMessages.appendChild(botMsg);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }, 700);
-    };
-
-    if (chatbotSend) chatbotSend.addEventListener('click', handleSendMessage);
-    if (chatbotInput) {
-      chatbotInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSendMessage();
-      });
-    }
-  }
-
-  // 7. Scroll to Top
-  const scrollTopBtn = document.getElementById('scroll-to-top-btn');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
-      scrollTopBtn?.classList.remove('opacity-0', 'invisible', 'pointer-events-none', 'translate-y-4');
-      scrollTopBtn?.classList.add('opacity-100', 'visible', 'pointer-events-auto', 'translate-y-0');
-    } else {
-      scrollTopBtn?.classList.add('opacity-0', 'invisible', 'pointer-events-none', 'translate-y-4');
-      scrollTopBtn?.classList.remove('opacity-100', 'visible', 'pointer-events-auto', 'translate-y-0');
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+
+    if (scrollProgressBar) scrollProgressBar.style.width = `${progress}%`;
+
+    if (header) {
+      if (scrollTop > 50) {
+        header.classList.add('py-2', 'shadow-lg');
+        header.classList.remove('py-4');
+      } else {
+        header.classList.add('py-4');
+        header.classList.remove('py-2', 'shadow-lg');
+      }
+    }
+
+    if (backToTopBtn) {
+      if (scrollTop > 400) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+        backToTopBtn.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+        backToTopBtn.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+      }
     }
   });
 
-  if (scrollTopBtn) {
-    scrollTopBtn.addEventListener('click', () => {
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
+  // 3. Render Projects Grid & Interactive Filtering
+  renderProjects('all');
+
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const category = btn.getAttribute('data-filter');
+      renderProjects(category);
+    });
+  });
+
+  function renderProjects(filterCategory) {
+    const container = document.getElementById('projects-grid');
+    if (!container) return;
+
+    const filtered = filterCategory === 'all' 
+      ? PORTFOLIO_DATA.projects 
+      : PORTFOLIO_DATA.projects.filter(p => 
+          p.category.toLowerCase() === filterCategory.toLowerCase() ||
+          p.technologies.some(t => t.toLowerCase().includes(filterCategory.toLowerCase()))
+        );
+
+    container.innerHTML = filtered.map(proj => `
+      <div class="dev-card p-6 sm:p-8 flex flex-col justify-between group">
+        <div>
+          <div class="rounded-xl overflow-hidden bg-slate-950 border border-white/10 mb-6 relative aspect-video">
+            <img src="${proj.image}" alt="${proj.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-purple-300">
+              ${proj.categoryDisplay}
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h3 class="text-2xl font-bold text-white font-display">${proj.title}</h3>
+          </div>
+
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            ${proj.shortDesc}
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            ${proj.technologies.map(t => `<span class="badge-pill text-xs">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+          <a href="${proj.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-solid text-xs py-2.5">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <span>Live Website</span>
+          </a>
+          <button class="btn-outline text-xs py-2.5 view-case-study-btn" data-project-id="${proj.id}">
+            <i class="fa-solid fa-file-lines text-xs"></i>
+            <span>View Case Study</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    // Attach Case Study Modal Handlers
+    document.querySelectorAll('.view-case-study-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pId = btn.getAttribute('data-project-id');
+        openCaseStudyModal(pId);
+      });
+    });
+  }
+
+  // 4. Case Study Modal Logic
+  const caseStudyModal = document.getElementById('case-study-modal');
+  const caseStudyContent = document.getElementById('case-study-content');
+  const caseStudyClose = document.getElementById('case-study-close');
+
+  function openCaseStudyModal(projectId) {
+    const proj = PORTFOLIO_DATA.projects.find(p => p.id === projectId);
+    if (!proj || !caseStudyModal || !caseStudyContent) return;
+
+    const cs = proj.caseStudy;
+    caseStudyContent.innerHTML = `
+      <div class="space-y-6">
+        <!-- Header -->
+        <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <span class="badge-pill text-xs mb-2">${proj.categoryDisplay}</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">${proj.title}</h2>
+            <div class="text-sm text-slate-400 mt-1">Client / Industry: <strong class="text-slate-200">${cs.client}</strong></div>
+            <div class="text-sm text-slate-400">Role: <strong class="text-purple-400">${cs.role}</strong></div>
+          </div>
+          <a href="${proj.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-solid text-xs py-2.5 px-5">
+            <span>Visit Live Website</span> <i class="fa-solid fa-external-link text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Media Preview -->
+        <div class="rounded-xl overflow-hidden border border-white/10 aspect-video max-h-[360px] bg-slate-950">
+          <img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Challenge & Solution Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="dev-card p-6">
+            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-triangle-exclamation text-amber-400 text-sm"></i> The Challenge
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed">${cs.challenge}</p>
+          </div>
+
+          <div class="dev-card p-6">
+            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-lightbulb text-emerald-400 text-sm"></i> The Solution
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed">${cs.solution}</p>
+          </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="dev-card p-6 space-y-3">
+          <h4 class="text-lg font-bold text-white">Key Implemented Features</h4>
+          <ul class="space-y-2">
+            ${cs.features.map(f => `
+              <li class="flex items-start gap-2.5 text-sm text-slate-300">
+                <i class="fa-solid fa-check text-purple-400 mt-1 text-xs"></i>
+                <span>${f}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <!-- Technologies Used -->
+        <div>
+          <h4 class="text-sm font-bold uppercase font-mono text-slate-400 mb-3">Technologies</h4>
+          <div class="flex flex-wrap gap-2">
+            ${proj.technologies.map(t => `<span class="badge-pill text-xs">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="bg-purple-950/30 border border-purple-500/20 rounded-xl p-5">
+          <h4 class="text-sm font-bold text-purple-300 mb-1">Impact & Outcome</h4>
+          <p class="text-sm text-slate-300">${cs.results}</p>
+        </div>
+      </div>
+    `;
+
+    caseStudyModal.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+    caseStudyModal.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCaseStudy() {
+    if (!caseStudyModal) return;
+    caseStudyModal.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+    caseStudyModal.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+    document.body.style.overflow = 'auto';
+  }
+
+  if (caseStudyClose) caseStudyClose.addEventListener('click', closeCaseStudy);
+  if (caseStudyModal) {
+    caseStudyModal.addEventListener('click', (e) => {
+      if (e.target === caseStudyModal) closeCaseStudy();
+    });
+  }
+
+  // 5. Render Blog Posts & Blog Modal
+  const blogContainer = document.getElementById('blog-grid');
+  if (blogContainer) {
+    blogContainer.innerHTML = PORTFOLIO_DATA.blogPosts.map(post => `
+      <div class="dev-card p-6 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+            <span class="badge-pill text-[11px]">${post.category}</span>
+            <span>${post.readTime}</span>
+          </div>
+          <h3 class="text-xl font-bold text-white font-display mb-3 group-hover:text-purple-400 transition-colors">
+            ${post.title}
+          </h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            ${post.excerpt}
+          </p>
+        </div>
+        <button class="read-blog-btn text-xs font-bold text-purple-400 hover:text-purple-300 flex items-center gap-1.5 self-start" data-blog-id="${post.id}">
+          <span>Read Article</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.read-blog-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const bId = btn.getAttribute('data-blog-id');
+        openBlogModal(bId);
+      });
+    });
+  }
+
+  const blogModal = document.getElementById('blog-modal');
+  const blogContent = document.getElementById('blog-modal-content');
+  const blogClose = document.getElementById('blog-modal-close');
+
+  function openBlogModal(blogId) {
+    const post = PORTFOLIO_DATA.blogPosts.find(b => b.id === blogId);
+    if (!post || !blogModal || !blogContent) return;
+
+    blogContent.innerHTML = `
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+          <span class="badge-pill text-[11px]">${post.category}</span>
+          <span>•</span>
+          <span>${post.readTime}</span>
+          <span>•</span>
+          <span>Published ${post.date}</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white font-display">${post.title}</h2>
+        <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 border-t border-white/10 pt-4">
+          ${post.content}
+        </div>
+      </div>
+    `;
+
+    blogModal.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+    blogModal.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBlogModal() {
+    if (!blogModal) return;
+    blogModal.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+    blogModal.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+    document.body.style.overflow = 'auto';
+  }
+
+  if (blogClose) blogClose.addEventListener('click', closeBlogModal);
+  if (blogModal) {
+    blogModal.addEventListener('click', (e) => {
+      if (e.target === blogModal) closeBlogModal();
+    });
+  }
+
+  // 6. AI Portfolio Assistant Logic
+  const aiToggle = document.getElementById('ai-assistant-toggle');
+  const aiPanel = document.getElementById('ai-assistant-panel');
+  const aiClose = document.getElementById('ai-assistant-close');
+  const aiSend = document.getElementById('ai-send-btn');
+  const aiInput = document.getElementById('ai-input-text');
+  const aiMessages = document.getElementById('ai-messages-box');
+
+  if (aiToggle && aiPanel) {
+    aiToggle.addEventListener('click', () => {
+      const isHidden = aiPanel.classList.contains('hidden');
+      if (isHidden) {
+        aiPanel.classList.remove('hidden');
+        setTimeout(() => {
+          aiPanel.classList.remove('scale-95', 'opacity-0');
+          aiPanel.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      } else {
+        aiPanel.classList.add('scale-95', 'opacity-0');
+        aiPanel.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => aiPanel.classList.add('hidden'), 200);
+      }
+    });
+
+    if (aiClose) {
+      aiClose.addEventListener('click', () => {
+        aiPanel.classList.add('scale-95', 'opacity-0');
+        aiPanel.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => aiPanel.classList.add('hidden'), 200);
+      });
+    }
+
+    // Suggested question buttons
+    document.querySelectorAll('.ai-prompt-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.textContent.trim();
+        handleUserQuery(query);
+      });
+    });
+
+    const handleUserQuery = (text) => {
+      if (!text) return;
+
+      // Add user message
+      const userBubble = document.createElement('div');
+      userBubble.className = 'flex items-start justify-end';
+      userBubble.innerHTML = `
+        <div class="bg-purple-600/30 border border-purple-500/40 text-slate-100 text-xs p-3 rounded-2xl rounded-tr-none max-w-[85%]">
+          ${text}
+        </div>
+      `;
+      aiMessages.appendChild(userBubble);
+      if (aiInput) aiInput.value = '';
+      aiMessages.scrollTop = aiMessages.scrollHeight;
+
+      // Match response from FAQ configuration
+      setTimeout(() => {
+        let matchedAnswer = "I'm Muhammad's portfolio assistant. For specific custom requirements or inquiries, you can reach out directly via the Contact form or WhatsApp at 0340-1350380!";
+        
+        const lower = text.toLowerCase();
+        for (const item of PORTFOLIO_DATA.faqAssistant) {
+          if (item.keywords.some(k => lower.includes(k))) {
+            matchedAnswer = item.answer;
+            break;
+          }
+        }
+
+        const botBubble = document.createElement('div');
+        botBubble.className = 'flex items-start gap-2.5';
+        botBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-[10px] font-mono font-bold flex-shrink-0">AI</div>
+          <div class="bg-white/5 border border-white/10 text-slate-200 text-xs p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed shadow-sm">
+            ${matchedAnswer}
+          </div>
+        `;
+        aiMessages.appendChild(botBubble);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+      }, 450);
+    };
+
+    if (aiSend) {
+      aiSend.addEventListener('click', () => {
+        handleUserQuery(aiInput.value.trim());
+      });
+    }
+
+    if (aiInput) {
+      aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleUserQuery(aiInput.value.trim());
+      });
+    }
+  }
+
+  // 7. Contact Form Submission Handler
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-xs"></i> <span>Sending...</span>';
+      }
+
+      setTimeout(() => {
+        if (formStatus) {
+          formStatus.classList.remove('hidden');
+          formStatus.className = 'p-4 rounded-xl text-center text-sm font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-300';
+          formStatus.textContent = 'Thank you! Your message has been sent successfully. Muhammad will respond shortly.';
+        }
+        contactForm.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Start a Project</span> <i class="fa-solid fa-arrow-right text-xs"></i>';
+        }
+      }, 1000);
+    });
+  }
+
   // 8. Mobile Navigation Drawer
-  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
       const isOpen = !mobileMenu.classList.contains('translate-x-full');
       if (isOpen) {
         mobileMenu.classList.add('translate-x-full', 'invisible');

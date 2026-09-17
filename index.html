@@ -4,30 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO Optimization -->
-  <title>Ansaar Bhatti | Full Stack Web Developer & WordPress Expert</title>
-  <meta name="description" content="Premium portfolio of Ansaar Bhatti, a professional Full Stack Web Developer and WordPress Expert. Crafting high-performance, client-attracting custom websites.">
-  <meta name="keywords" content="Ansaar Bhatti, Full Stack Developer, WordPress Expert, Web Developer, Elementor, PHP, Custom WordPress, eCommerce, WooCommerce, Website Management">
-  <meta name="author" content="Ansaar Bhatti">
+  <!-- Primary SEO Metadata -->
+  <title>Muhammad Ansaar | WordPress & Web Developer</title>
+  <meta name="description" content="Professional portfolio of Muhammad Ansaar, WordPress & Web Developer specializing in bespoke business websites, high-converting WooCommerce stores, Technical SEO, and AI automations.">
+  <meta name="keywords" content="Muhammad Ansaar, WordPress Developer, Web Developer, WooCommerce Expert, Elementor Pro, Technical SEO, Website Optimization, AI Automation">
+  <meta name="author" content="Muhammad Ansaar">
+  <link rel="canonical" href="https://ansaarbhatti.com/">
   
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ansaarbhatti.com/">
-  <meta property="og:title" content="Ansaar Bhatti | Full Stack Web Developer & WordPress Expert">
-  <meta property="og:description" content="Premium portfolio of Ansaar Bhatti. Specializing in WordPress customization, eCommerce, and custom full stack solutions.">
+  <meta property="og:title" content="Muhammad Ansaar | WordPress & Web Developer">
+  <meta property="og:description" content="Building modern, responsive and high-performance websites for businesses, brands and eCommerce.">
+  <meta property="og:image" content="/assets/profile.jpg">
   
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Muhammad Ansaar",
+    "jobTitle": "WordPress & Web Developer",
+    "url": "https://ansaarbhatti.com/",
+    "sameAs": [
+      "https://github.com/ansaarbhatti100",
+      "https://linkedin.com/in/ansaarbhatti"
+    ],
+    "knowsAbout": [
+      "WordPress Development",
+      "WooCommerce",
+      "Elementor Pro",
+      "Frontend Web Development",
+      "Technical SEO",
+      "AI & WhatsApp Automation"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "University of Sargodha"
+    }
+  }
+  </script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
               purple: '#a855f7',
-              cyan: '#06b6d4',
               blue: '#3b82f6',
-              dark: '#030712'
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              dark: '#090d16'
             }
           }
         }
@@ -35,574 +66,357 @@
     }
   </script>
 
-  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <!-- Fonts & FontAwesome CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome & Lucide Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Three.js CDN for 3D Hero Element -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- Custom Styles -->
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="bg-[#030712] text-slate-300 font-sans antialiased overflow-x-hidden relative selection:bg-purple-500 selection:text-white">
+<body class="bg-[#090d16] text-slate-300 font-sans antialiased overflow-x-hidden relative selection:bg-purple-600 selection:text-white">
 
-  <!-- Ambient Glowing Background Blobs -->
-  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-    <div class="ambient-glow -top-40 -left-40 w-[600px] h-[600px] bg-purple-600/20"></div>
-    <div class="ambient-glow top-[35%] -right-40 w-[700px] h-[700px] bg-cyan-600/15" style="animation-delay: -5s;"></div>
-    <div class="ambient-glow -bottom-40 left-[25%] w-[650px] h-[650px] bg-blue-600/15" style="animation-delay: -10s;"></div>
-    <div class="cyber-grid absolute inset-0 opacity-40"></div>
-  </div>
+  <!-- Top Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
 
-  <!-- Header & Navigation -->
-  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12">
-    <div class="max-w-7xl mx-auto flex items-center justify-between bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+  <!-- Ambient Grid & Glow -->
+  <div class="fixed inset-0 pointer-events-none z-0 dev-grid opacity-30" aria-hidden="true"></div>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 bg-[#090d16]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Logo -->
-      <a href="#home" class="group flex items-center space-x-2 text-xl sm:text-2xl font-bold tracking-tight">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400 font-display">ANSAAR</span>
-        <span class="text-white font-light group-hover:text-purple-300 transition-colors">BHATTI</span>
+      <!-- Brand Logo -->
+      <a href="#home" class="group flex items-center space-x-2 text-xl font-bold tracking-tight text-white">
+        <span class="font-display">Muhammad Ansaar</span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-1">
-        <a href="#home" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Home</a>
-        <a href="#about" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">About</a>
-        <a href="#skills" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Skills</a>
-        <a href="#services" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Services</a>
-        <a href="#projects" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Projects</a>
-        <a href="#testimonials" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Reviews</a>
-        <a href="#contact" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Contact</a>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-400">
+        <a href="#home" class="hover:text-white transition-colors">Home</a>
+        <a href="#about" class="hover:text-white transition-colors">About</a>
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+        <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+        <a href="#blog" class="hover:text-white transition-colors">Blog</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
       </nav>
 
-      <!-- CTA Button -->
-      <div class="hidden md:block">
-        <a href="#contact" class="btn-primary text-xs py-2.5 px-5">
-          <span>Hire Me</span>
-          <i class="fas fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
+      <!-- Right Actions: Theme Toggle & CTA -->
+      <div class="flex items-center space-x-4">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-all" aria-label="Toggle Theme">
+          <i class="fa-solid fa-sun text-sm"></i>
+        </button>
 
-      <!-- Hamburger Button (Mobile) -->
-      <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white focus:outline-none" aria-label="Toggle Menu">
-        <i class="fas fa-bars text-lg"></i>
-      </button>
+        <!-- CTA Button -->
+        <a href="#contact" class="hidden sm:inline-flex btn-solid text-xs py-2 px-4 font-semibold">
+          <span>Let's Work Together</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobile-menu-btn" class="lg:hidden w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white focus:outline-none" aria-label="Open Navigation Menu">
+          <i class="fa-solid fa-bars text-sm"></i>
+        </button>
+      </div>
 
     </div>
   </header>
 
-  <!-- Mobile Menu Drawer Overlay -->
+  <!-- Mobile Menu Drawer -->
   <div id="mobile-menu" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 translate-x-full invisible transition-all duration-300 flex justify-end">
-    <div class="w-80 max-w-[85vw] h-full bg-[#0a0f1d] border-l border-white/10 flex flex-col p-6 shadow-2xl overflow-y-auto">
-      
-      <!-- Profile Header -->
-      <div class="flex items-center space-x-4 mb-6 mt-8 pb-6 border-b border-white/10">
-        <div class="relative w-14 h-14 rounded-full p-[2px] bg-gradient-to-tr from-purple-500 to-cyan-500 shadow-lg">
-          <img src="/assets/profile.jpg" alt="Ansaar Bhatti" class="w-full h-full rounded-full object-cover">
-        </div>
-        <div>
-          <h4 class="text-base font-bold text-white leading-tight">Ansaar Bhatti</h4>
-          <span class="text-xs text-purple-400 font-mono">Web Developer</span>
-        </div>
+    <div class="w-80 max-w-[85vw] h-full bg-[#0e1424] border-l border-white/10 flex flex-col p-6 shadow-2xl overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mt-4">
+        <span class="font-bold text-white font-display">Muhammad Ansaar</span>
+        <button id="mobile-menu-close" class="text-slate-400 hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible')">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
       </div>
 
-      <!-- Navigation Links -->
-      <nav class="flex flex-col space-y-2">
-        <a href="#home" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-house text-purple-400 w-5"></i>
-          <span>Home</span>
-        </a>
-        <a href="#about" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-user text-cyan-400 w-5"></i>
-          <span>About</span>
-        </a>
-        <a href="#skills" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-code text-blue-400 w-5"></i>
-          <span>Skills</span>
-        </a>
-        <a href="#services" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-briefcase text-purple-400 w-5"></i>
-          <span>Services</span>
-        </a>
-        <a href="#projects" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-layer-group text-cyan-400 w-5"></i>
-          <span>Projects</span>
-        </a>
-        <a href="#testimonials" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-star text-amber-400 w-5"></i>
-          <span>Reviews</span>
-        </a>
-        <a href="#contact" class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
-          <i class="fa-solid fa-envelope text-emerald-400 w-5"></i>
-          <span>Contact</span>
-        </a>
+      <nav class="flex flex-col space-y-2 mt-6">
+        <a href="#home" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Home</a>
+        <a href="#about" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">About</a>
+        <a href="#services" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Services</a>
+        <a href="#projects" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Projects</a>
+        <a href="#skills" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Skills</a>
+        <a href="#experience" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Experience</a>
+        <a href="#blog" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Blog</a>
+        <a href="#contact" class="mobile-nav-link px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">Contact</a>
       </nav>
 
-      <!-- Bottom WhatsApp CTA -->
-      <div class="mt-auto pt-6 border-t border-white/10 flex flex-col space-y-3">
-        <div class="text-xs text-center text-slate-400">Let's build something great!</div>
-        <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-xs py-2.5">
-          <i class="fab fa-whatsapp text-sm"></i>
-          <span>Chat on WhatsApp</span>
+      <div class="mt-auto pt-6 border-t border-white/10 space-y-3">
+        <a href="#contact" class="btn-solid w-full text-xs py-2.5 text-center">
+          <span>Let's Work Together</span>
         </a>
       </div>
-
     </div>
   </div>
 
   <main class="relative z-10">
 
     <!-- ==========================================
-         1. HERO SECTION (Futuristic Bento + 3D WebGL)
+         HERO SECTION
          ========================================== -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
-      <div class="max-w-7xl mx-auto w-full">
+    <section id="home" class="min-h-screen flex items-center justify-center pt-32 pb-20 px-6 md:px-12 relative">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Bento Grid Hero Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
           
-          <!-- Left Column: Bio & Action -->
-          <div class="lg:col-span-7 space-y-6 text-center lg:text-left z-10">
+          <!-- Availability Indicator -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
+            <span class="dot-live"></span>
+            <span>Available for Freelance Projects</span>
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white font-display leading-[1.1]">
+            Muhammad Ansaar
+          </h1>
+          
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400 font-display">
+            WordPress & Web Developer
+          </h2>
+          
+          <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+            I build modern, responsive and high-performance websites for businesses, brands and eCommerce.
+          </p>
+
+          <!-- Technology Badges -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2">
+            <span class="badge-pill">WordPress</span>
+            <span class="badge-pill">WooCommerce</span>
+            <span class="badge-pill">Elementor</span>
+            <span class="badge-pill">JavaScript</span>
+            <span class="badge-pill">SEO</span>
+            <span class="badge-pill">AI Automation</span>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+            <a href="#projects" class="btn-solid">
+              <span>View My Projects</span>
+              <i class="fa-solid fa-arrow-down text-xs"></i>
+            </a>
             
-            <div class="status-pill inline-flex">
-              <span class="status-dot"></span>
-              <span>Available for New Projects</span>
+            <a href="#contact" class="btn-outline">
+              <span>Let's Work Together</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Visual -->
+        <div class="lg:col-span-5 flex justify-center items-center">
+          <div class="dev-card p-4 sm:p-5 w-full max-w-sm relative group shadow-2xl">
+            <div class="rounded-xl overflow-hidden bg-slate-950 border border-white/10 aspect-[4/5] relative">
+              <img src="assets/profile.jpg" alt="Muhammad Ansaar - WordPress & Web Developer" class="w-full h-full object-cover">
+              
+              <div class="absolute bottom-3 left-3 right-3 bg-[#090d16]/90 backdrop-blur-md border border-white/10 rounded-lg p-3 text-xs">
+                <div class="font-bold text-white">Muhammad Ansaar</div>
+                <div class="text-purple-400 font-mono text-[11px]">WordPress • Web • Automation</div>
+              </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         DEVELOPER STATS
+         ========================================== -->
+    <section class="py-12 px-6 md:px-12 border-y border-white/5 bg-[#0e1424]/40">
+      <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        
+        <div class="dev-card p-6">
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">150+</div>
+          <div class="text-xs uppercase font-mono text-slate-400">Projects Built</div>
+        </div>
+
+        <div class="dev-card p-6">
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">95+</div>
+          <div class="text-xs uppercase font-mono text-slate-400">Websites Developed</div>
+        </div>
+
+        <div class="dev-card p-6">
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">12+</div>
+          <div class="text-xs uppercase font-mono text-slate-400">Technologies</div>
+        </div>
+
+        <div class="dev-card p-6">
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">40+</div>
+          <div class="text-xs uppercase font-mono text-slate-400">Worldwide Clients</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ABOUT ME
+         ========================================== -->
+    <section id="about" class="py-24 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">About Me</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">
+              Focused on modern business websites, eCommerce stores & custom solutions
+            </h2>
             
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white font-display">
-              Hi, I am <br class="hidden sm:block">
-              <span class="gradient-text">Ansaar Bhatti</span>
-            </h1>
-            
-            <!-- Dynamic Typing Subtitle -->
-            <div class="text-xl sm:text-2xl md:text-3xl font-medium text-slate-300 flex justify-center lg:justify-start items-center h-12">
-              <span class="mr-2">I build</span>
-              <span id="typing-text" class="gradient-text-cyan font-bold typing-caret pr-1"></span>
-            </div>
-            
-            <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-              I craft visually stunning, high-performance websites and bespoke WordPress systems. By blending full-stack expertise with modern UI/UX design, I build web applications that convert visitors into loyal clients.
+            <p class="text-slate-300 text-base leading-relaxed">
+              I'm Muhammad Ansaar, a WordPress & Web Developer focused on building modern business websites, eCommerce stores and custom web solutions.
             </p>
-            
-            <!-- CTA Action Buttons -->
-            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-              <a href="#projects" class="btn-primary">
-                <span>View Projects</span>
-                <i class="fas fa-arrow-right text-xs"></i>
-              </a>
-              
-              <a href="#contact" class="btn-secondary">
-                <span>Hire Me</span>
-              </a>
-            </div>
-            
-            <!-- Social Icons -->
-            <div class="flex items-center justify-center lg:justify-start space-x-5 pt-6 text-slate-400">
-              <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-white hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-white hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            </div>
 
-          </div>
-          
-          <!-- Right Column: Interactive 3D Canvas & Profile Bento Card -->
-          <div class="lg:col-span-5 flex justify-center items-center z-10 relative">
-            <div class="relative w-full max-w-[440px] aspect-square flex items-center justify-center">
-              
-              <!-- 3D Three.js Canvas Container -->
-              <div id="hero-3d-wrapper" class="absolute inset-0 z-0"></div>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              My technical expertise spans full-lifecycle web development, from structuring semantic layouts and high-converting WooCommerce storefronts to configuring technical SEO schemas and intelligent API-based automations.
+            </p>
 
-              <!-- Center Frosted Profile Bento Card with 3D Tilt -->
-              <div class="bento-card spotlight-card border-beam p-4 w-72 h-72 sm:w-80 sm:h-80 z-10 flex items-center justify-center shadow-2xl">
-                <div class="w-full h-full rounded-2xl overflow-hidden relative bg-slate-950 border border-white/10">
-                  <img src="/assets/profile.jpg" alt="Ansaar Bhatti" id="profile-img" class="w-full h-full object-cover">
-                  
-                  <!-- Floating Tag -->
-                  <div class="absolute bottom-3 left-3 bg-[#030712]/90 border border-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl flex items-center space-x-2 shadow-lg">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-200 font-mono">WordPress Guru</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Scroll Indicator -->
-      <a href="#about" aria-label="Scroll to About section" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 text-slate-500 hover:text-slate-300 transition-colors">
-        <span class="text-[10px] font-mono tracking-widest uppercase">SCROLL</span>
-        <div class="w-5 h-9 border border-white/20 rounded-full flex justify-center p-1">
-          <div class="w-1 h-2 bg-purple-400 rounded-full animate-bounce"></div>
-        </div>
-      </a>
-    </section>
-
-    <!-- ==========================================
-         2. ABOUT SECTION (Bento Metric Matrix)
-         ========================================== -->
-    <section id="about" class="py-24 px-6 md:px-12 relative overflow-hidden">
-      <div class="max-w-7xl mx-auto space-y-16">
-        
-        <!-- Section Heading -->
-        <div class="text-center md:text-left space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">01 // ABOUT ME</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Crafting high-speed, secure, & responsive solutions</h2>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
-          <!-- Bio Narrative Bento Card -->
-          <div class="lg:col-span-7 bento-card spotlight-card p-8 md:p-10 flex flex-col justify-between space-y-6">
-            <div class="space-y-4">
-              <h3 class="text-2xl font-bold text-white font-display">Full Stack Web Developer & WordPress Architect</h3>
-              <p class="text-slate-400 leading-relaxed text-sm sm:text-base">
-                With years of experience building modern web products, I specialize in crafting bespoke solutions that drive actual results. My core capability involves building full-stack web applications using advanced coding frameworks, alongside creating and customizing premium WordPress architectures from scratch.
-              </p>
-              <p class="text-slate-400 leading-relaxed text-sm sm:text-base">
-                I focus heavily on clean architecture, lightning-fast performance, SEO optimization, and premium design details. From simple landing pages to complex corporate portals and eCommerce systems, my goal is to ensure a seamless experience for administrators and visitors alike.
-              </p>
-            </div>
-            
-            <div class="pt-4 flex flex-wrap gap-4 border-t border-white/5">
-              <a href="/assets/cv.pdf" download class="btn-secondary text-xs py-3 px-6">
-                <i class="fas fa-download text-purple-400 text-xs"></i>
+            <div class="pt-4 flex flex-wrap gap-4">
+              <a href="assets/cv.pdf" download class="btn-solid text-xs py-3 px-6">
                 <span>Download CV</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
               </a>
-              <a href="#contact" class="btn-primary text-xs py-3 px-6">
-                <span>Let's Talk</span>
+              <a href="#projects" class="btn-outline text-xs py-3 px-6">
+                <span>View Projects</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
               </a>
             </div>
           </div>
 
-          <!-- 4 Metric Bento Grid Cards -->
-          <div class="lg:col-span-5 grid grid-cols-2 gap-4">
-            
-            <!-- Stat 1 -->
-            <div class="bento-card spotlight-card p-6 flex flex-col justify-center space-y-2 group">
-              <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-lg mb-1 group-hover:bg-purple-500 group-hover:text-white transition-all">
-                <i class="fas fa-code"></i>
-              </div>
-              <span class="text-3xl sm:text-4xl font-black text-white font-mono flex items-center">
-                <span class="counter-value" data-target="3">0</span><span class="text-purple-400">+</span>
-              </span>
-              <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold font-mono">Years of Experience</span>
+          <!-- Technical Visual Elements Grid -->
+          <div class="lg:col-span-5 dev-card p-8 space-y-4">
+            <h3 class="text-sm font-bold uppercase font-mono text-slate-400 tracking-wider mb-2">Key Competencies</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge-pill">WordPress Development</span>
+              <span class="badge-pill">Elementor / Elementor Pro</span>
+              <span class="badge-pill">WooCommerce</span>
+              <span class="badge-pill">Frontend Development</span>
+              <span class="badge-pill">HTML</span>
+              <span class="badge-pill">CSS</span>
+              <span class="badge-pill">JavaScript</span>
+              <span class="badge-pill">Technical SEO</span>
+              <span class="badge-pill">Website Optimization</span>
+              <span class="badge-pill">API Integration</span>
+              <span class="badge-pill">AI Automation</span>
             </div>
-            
-            <!-- Stat 2 -->
-            <div class="bento-card spotlight-card p-6 flex flex-col justify-center space-y-2 group">
-              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-lg mb-1 group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                <i class="fas fa-check-circle"></i>
-              </div>
-              <span class="text-3xl sm:text-4xl font-black text-white font-mono flex items-center">
-                <span class="counter-value" data-target="150">0</span><span class="text-cyan-400">+</span>
-              </span>
-              <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold font-mono">Projects Completed</span>
-            </div>
-
-            <!-- Stat 3 -->
-            <div class="bento-card spotlight-card p-6 flex flex-col justify-center space-y-2 group">
-              <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-lg mb-1 group-hover:bg-blue-500 group-hover:text-white transition-all">
-                <i class="fas fa-smile"></i>
-              </div>
-              <span class="text-3xl sm:text-4xl font-black text-white font-mono flex items-center">
-                <span class="counter-value" data-target="99">0</span><span class="text-blue-400">%</span>
-              </span>
-              <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold font-mono">Happy Clients</span>
-            </div>
-
-            <!-- Stat 4 -->
-            <div class="bento-card spotlight-card p-6 flex flex-col justify-center space-y-2 group">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-lg mb-1 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                <i class="fas fa-network-wired"></i>
-              </div>
-              <span class="text-3xl sm:text-4xl font-black text-white font-mono flex items-center">
-                <span class="counter-value" data-target="24">0</span><span class="text-emerald-400">/7</span>
-              </span>
-              <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold font-mono">Support Offered</span>
-            </div>
-
           </div>
 
         </div>
-
       </div>
     </section>
 
     <!-- ==========================================
-         3. SKILLS SECTION (High-Tech Bento Matrix)
+         SERVICES (6 Cards)
          ========================================== -->
-    <section id="skills" class="py-24 px-6 md:px-12 relative overflow-hidden">
+    <section id="services" class="py-24 px-6 md:px-12 bg-[#0e1424]/30 border-t border-white/5">
       <div class="max-w-7xl mx-auto space-y-16">
         
-        <!-- Section Heading -->
         <div class="text-center space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">02 // MY SKILLSET</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Specialized capabilities and tech stacks</h2>
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Services</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Specialized Capabilities</h2>
         </div>
 
-        <!-- Skill Cards Bento Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- HTML5 -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all">
-                  <i class="fab fa-html5"></i>
-                </div>
-                <span class="text-xs font-bold text-purple-400 font-mono">95%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">HTML5</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Semantic architecture, SEO meta formatting, and raw page layout structuring.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-purple-500 to-indigo-500 w-[95%]"></div>
-            </div>
-          </div>
-
-          <!-- CSS3 & Tailwind -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                  <i class="fab fa-css3-alt"></i>
-                </div>
-                <span class="text-xs font-bold text-cyan-400 font-mono">92%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">CSS3 & Tailwind</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Advanced styling, glassmorphism, responsive grids, transitions, and keyframes.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[92%]"></div>
-            </div>
-          </div>
-
-          <!-- JavaScript (ES6+) -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl group-hover:bg-blue-500 group-hover:text-white transition-all">
-                  <i class="fab fa-js"></i>
-                </div>
-                <span class="text-xs font-bold text-blue-400 font-mono">88%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">JavaScript (ES6+)</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Asynchronous requests, DOM animations (GSAP), custom sliders, state handling.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 w-[88%]"></div>
-            </div>
-          </div>
-
-          <!-- WordPress Expert -->
-          <div class="bento-card spotlight-card border-beam p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all">
-                  <i class="fab fa-wordpress"></i>
-                </div>
-                <span class="text-xs font-bold text-purple-400 font-mono">98%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">WordPress Expert</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Theme development, backend custom post types, hook systems, API integrations.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-purple-500 to-cyan-500 w-[98%]"></div>
-            </div>
-          </div>
-
-          <!-- Elementor Pro -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl group-hover:bg-indigo-500 group-hover:text-white transition-all">
-                  <i class="fas fa-cubes"></i>
-                </div>
-                <span class="text-xs font-bold text-indigo-400 font-mono">96%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">Elementor Pro</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Bespoke dynamic styling, Elementor loop builders, custom CSS injections, performance.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[96%]"></div>
-            </div>
-          </div>
-
-          <!-- PHP Development -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                  <i class="fab fa-php"></i>
-                </div>
-                <span class="text-xs font-bold text-cyan-400 font-mono">85%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">PHP Development</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Server backend creation, MVC architecture, custom plugins, secure session management.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 w-[85%]"></div>
-            </div>
-          </div>
-
-          <!-- MySQL & Databases -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl group-hover:bg-blue-500 group-hover:text-white transition-all">
-                  <i class="fas fa-database"></i>
-                </div>
-                <span class="text-xs font-bold text-blue-400 font-mono">82%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">MySQL & Databases</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Database schema design, normalized structure, complex join queries, index tuning.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 w-[82%]"></div>
-            </div>
-          </div>
-
-          <!-- Website Management -->
-          <div class="bento-card spotlight-card p-6 flex flex-col justify-between group">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                  <i class="fas fa-server"></i>
-                </div>
-                <span class="text-xs font-bold text-emerald-400 font-mono">94%</span>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-2 font-display">Website Management</h3>
-              <p class="text-slate-400 text-xs leading-relaxed mb-6">Linux servers, cPanel/WHM, SSH scripting, DNS management, security hardening.</p>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 w-[94%]"></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         4. SERVICES SECTION (Frosted Bento Cards)
-         ========================================== -->
-    <section id="services" class="py-24 px-6 md:px-12 relative overflow-hidden">
-      <div class="max-w-7xl mx-auto space-y-16">
-        
-        <!-- Section Heading -->
-        <div class="text-center space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">03 // WHAT I DO</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Professional web development services</h2>
-        </div>
-
-        <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          <!-- Service 1: WordPress Development -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
+          <!-- Card 1 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
             <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
-                <i class="fab fa-wordpress-simple"></i>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl group-hover:bg-purple-500 group-hover:text-white transition-all">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white font-display">Web Development</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Modern business, corporate and landing websites built with clean code and high performance standards.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-purple-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl group-hover:bg-blue-500 group-hover:text-white transition-all">
+                <i class="fa-brands fa-wordpress"></i>
               </div>
               <h3 class="text-2xl font-bold text-white font-display">WordPress Development</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                Custom theme design, plugin configuration, full-scale development using hooks, custom widgets, Gutenberg integrations, and element templates designed from scratch.
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Custom WordPress websites, customization and functionality built from scratch.
               </p>
             </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-purple-400 group-hover:text-purple-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-blue-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
 
-          <!-- Service 2: eCommerce Stores -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
+          <!-- Card 3 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
             <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300">
-                <i class="fas fa-shopping-bag"></i>
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-500 group-hover:text-white transition-all">
+                <i class="fa-solid fa-bag-shopping"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">eCommerce Stores</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                WooCommerce setup, payment gateway integrations, custom checkout pages, product filters, cart management systems, dynamic inventory feeds, and customer portals.
+              <h3 class="text-2xl font-bold text-white font-display">WooCommerce</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Professional eCommerce stores, product pages and online shopping systems.
               </p>
             </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-cyan-400 group-hover:text-cyan-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-cyan-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
 
-          <!-- Service 3: Business Websites -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
+          <!-- Card 4 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
             <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                <i class="fas fa-building"></i>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl group-hover:bg-purple-500 group-hover:text-white transition-all">
+                <i class="fa-solid fa-laptop-code"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">Business Websites</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                Stunning corporate portals showcasing service capabilities, visual portfolios, interactive lead forms, and structured layouts designed to scale brand credibility.
+              <h3 class="text-2xl font-bold text-white font-display">UI / Frontend Development</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Responsive, modern and user-friendly interfaces tailored for optimal visitor engagement.
               </p>
             </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-blue-400 group-hover:text-blue-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-purple-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
 
-          <!-- Service 4: Landing Pages -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
+          <!-- Card 5 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
             <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
-                <i class="fas fa-bullseye"></i>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                <i class="fa-solid fa-gauge-high"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">Landing Pages</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                High-converting promotional pages for product launches, marketing lead captures, event sign-ups, and special campaigns. Fully optimized for instant page speed.
+              <h3 class="text-2xl font-bold text-white font-display">Technical SEO & Performance</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Technical SEO, website structure, speed and Core Web Vitals optimization.
               </p>
             </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-indigo-400 group-hover:text-indigo-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-emerald-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
 
-          <!-- Service 5: Website Maintenance -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
+          <!-- Card 6 -->
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6 group">
             <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
-                <i class="fas fa-tools"></i>
+              <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                <i class="fa-solid fa-brain"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">Website Maintenance</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                Regular database optimization, platform and security patches, malware prevention, content modifications, hourly server monitoring, and backup scheduling.
+              <h3 class="text-2xl font-bold text-white font-display">AI & Automation</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                AI assistants, AI calling agents, WhatsApp automation and API-based workflows.
               </p>
             </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-purple-400 group-hover:text-purple-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-            </div>
-          </div>
-
-          <!-- Service 6: Custom Web Solutions -->
-          <div class="bento-card spotlight-card p-8 flex flex-col justify-between space-y-6 group">
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
-                <i class="fas fa-sliders-h"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-white font-display">Custom Web Solutions</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                Bespoke database dashboards, custom portal management scripts, CRM synchronizations, automated booking APIs, and tailored PHP/MySQL web utilities.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-emerald-400 group-hover:text-emerald-300">
-              <span>Learn More</span> <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+            <div class="pt-4 border-t border-white/5 flex items-center text-xs font-semibold text-indigo-400">
+              <span>Learn More</span> <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
 
@@ -612,201 +426,106 @@
     </section>
 
     <!-- ==========================================
-         5. PROJECTS SECTION (3D Tilt Bento Showcase)
+         FEATURED PROJECTS & FILTERING
          ========================================== -->
-    <section id="projects" class="py-24 px-6 md:px-12 relative overflow-hidden">
+    <section id="projects" class="py-24 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Featured Projects</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Selected projects and web experiences I've built.</h2>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="WordPress">WordPress</button>
+          <button class="filter-btn" data-filter="eCommerce">eCommerce</button>
+          <button class="filter-btn" data-filter="Business">Business</button>
+          <button class="filter-btn" data-filter="Manufacturing">Manufacturing</button>
+          <button class="filter-btn" data-filter="AI">AI / Automation</button>
+        </div>
+
+        <!-- Projects Dynamic Container -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TECHNOLOGY STACK
+         ========================================== -->
+    <section id="skills" class="py-24 px-6 md:px-12 bg-[#0e1424]/30 border-t border-white/5">
       <div class="max-w-7xl mx-auto space-y-16">
         
-        <!-- Section Heading -->
         <div class="text-center space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">04 // RECENT WORK</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Premium Projects Showcase</h2>
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Technology Stack</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Tools & Frameworks</h2>
         </div>
 
-        <!-- 4 Bento Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <!-- Project 1: Hospital Management -->
-          <div class="bento-card spotlight-card border-beam p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
-            <div>
-              <!-- Browser Mockup Header -->
-              <div class="rounded-2xl overflow-hidden bg-slate-950 border border-white/10 mb-6 shadow-2xl relative">
-                <div class="flex items-center px-4 py-2.5 bg-slate-900 border-b border-white/5 space-x-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                  <div class="w-full bg-slate-950/60 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://ansaar.dev/hospital-management</div>
-                </div>
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                  <img src="/assets/project1.jpg" alt="Hospital Management Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider font-mono">Custom Web</span>
-                <span class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-mono">$500+ Est. Value</span>
-              </div>
-
-              <h3 class="text-2xl sm:text-3xl font-bold text-white font-display mb-3">Hospital Management</h3>
-              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
-                A secure web application featuring real-time doctor appointment bookings, patient histories, dynamic prescription databases, invoicing systems, and administrative telemetry portals.
-              </p>
-              
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">PHP</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">MySQL</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Tailwind CSS</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">GSAP</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
-              <a href="#" class="btn-primary text-xs py-2.5">
-                <i class="fas fa-external-link-alt text-xs"></i>
-                <span>Live Demo</span>
-              </a>
-              <button class="project-details-btn btn-secondary text-xs py-2.5" data-project="project1">
-                <i class="fas fa-info-circle text-xs"></i>
-                <span>Details</span>
-              </button>
+          <!-- Frontend -->
+          <div class="dev-card p-6 space-y-4">
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-code text-purple-400"></i> Frontend
+            </h3>
+            <div class="space-y-2 text-sm text-slate-300">
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>HTML5</span><span class="text-xs text-slate-500 font-mono">Semantic</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>CSS3</span><span class="text-xs text-slate-500 font-mono">Responsive</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>JavaScript</span><span class="text-xs text-slate-500 font-mono">ES6+</span></div>
             </div>
           </div>
 
-          <!-- Project 2: Leather eCommerce -->
-          <div class="bento-card spotlight-card border-beam p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
-            <div>
-              <!-- Browser Mockup Header -->
-              <div class="rounded-2xl overflow-hidden bg-slate-950 border border-white/10 mb-6 shadow-2xl relative">
-                <div class="flex items-center px-4 py-2.5 bg-slate-900 border-b border-white/5 space-x-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                  <div class="w-full bg-slate-950/60 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://leathercraft-store.com</div>
-                </div>
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                  <img src="/assets/project2.jpg" alt="Leather eCommerce Store" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider font-mono">WordPress</span>
-                <span class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-mono">$1,200+ Est. Value</span>
-              </div>
-
-              <h3 class="text-2xl sm:text-3xl font-bold text-white font-display mb-3">Leather eCommerce</h3>
-              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
-                Premium retail eCommerce store constructed on WooCommerce with highly customizable product attributes, sizing calculators, responsive category filter sidebars, and direct stripe processing.
-              </p>
-              
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">WordPress</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">WooCommerce</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Elementor Pro</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Stripe</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
-              <a href="#" class="btn-primary text-xs py-2.5">
-                <i class="fas fa-external-link-alt text-xs"></i>
-                <span>Live Demo</span>
-              </a>
-              <button class="project-details-btn btn-secondary text-xs py-2.5" data-project="project2">
-                <i class="fas fa-info-circle text-xs"></i>
-                <span>Details</span>
-              </button>
+          <!-- WordPress -->
+          <div class="dev-card p-6 space-y-4">
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-brands fa-wordpress text-blue-400"></i> WordPress
+            </h3>
+            <div class="space-y-2 text-sm text-slate-300">
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>WordPress</span><span class="text-xs text-slate-500 font-mono">CMS</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>Elementor / Pro</span><span class="text-xs text-slate-500 font-mono">Visual Builder</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>WooCommerce</span><span class="text-xs text-slate-500 font-mono">eCommerce</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>WordPress Plugins</span><span class="text-xs text-slate-500 font-mono">Custom Setup</span></div>
             </div>
           </div>
 
-          <!-- Project 3: Business Portfolio -->
-          <div class="bento-card spotlight-card border-beam p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
-            <div>
-              <!-- Browser Mockup Header -->
-              <div class="rounded-2xl overflow-hidden bg-slate-950 border border-white/10 mb-6 shadow-2xl relative">
-                <div class="flex items-center px-4 py-2.5 bg-slate-900 border-b border-white/5 space-x-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                  <div class="w-full bg-slate-950/60 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://horizon-agency.com</div>
-                </div>
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                  <img src="/assets/project3.jpg" alt="Business Portfolio Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">WordPress</span>
-                <span class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 font-mono">$800+ Est. Value</span>
-              </div>
-
-              <h3 class="text-2xl sm:text-3xl font-bold text-white font-display mb-3">Business Portfolio</h3>
-              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
-                A sleek corporate agency website displaying advanced landing flows, dynamic project filtering widgets, custom lead analytics integration, and speed optimizations reaching 98+ PageSpeed.
-              </p>
-              
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">WordPress</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Elementor Pro</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Lottie Animations</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">SEO</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
-              <a href="#" class="btn-primary text-xs py-2.5">
-                <i class="fas fa-external-link-alt text-xs"></i>
-                <span>Live Demo</span>
-              </a>
-              <button class="project-details-btn btn-secondary text-xs py-2.5" data-project="project3">
-                <i class="fas fa-info-circle text-xs"></i>
-                <span>Details</span>
-              </button>
+          <!-- Backend / Integration -->
+          <div class="dev-card p-6 space-y-4">
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-server text-cyan-400"></i> Backend / Integration
+            </h3>
+            <div class="space-y-2 text-sm text-slate-300">
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>PHP</span><span class="text-xs text-slate-500 font-mono">Core Functions</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>MySQL</span><span class="text-xs text-slate-500 font-mono">Database</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>REST API</span><span class="text-xs text-slate-500 font-mono">Endpoints</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>Webhooks</span><span class="text-xs text-slate-500 font-mono">Real-Time</span></div>
             </div>
           </div>
 
-          <!-- Project 4: Custom WordPress Management System -->
-          <div class="bento-card spotlight-card border-beam p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
-            <div>
-              <!-- Browser Mockup Header -->
-              <div class="rounded-2xl overflow-hidden bg-slate-950 border border-white/10 mb-6 shadow-2xl relative">
-                <div class="flex items-center px-4 py-2.5 bg-slate-900 border-b border-white/5 space-x-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                  <div class="w-full bg-slate-950/60 rounded px-3 py-0.5 text-[10px] text-slate-500 font-mono text-center truncate">https://ansaar.dev/wp-manager</div>
-                </div>
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                  <img src="/assets/project4.jpg" alt="Custom WordPress Management System" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider font-mono">Custom Web</span>
-                <span class="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400 font-mono">$1,500+ Est. Value</span>
-              </div>
-
-              <h3 class="text-2xl sm:text-3xl font-bold text-white font-display mb-3">Management System</h3>
-              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
-                An advanced multi-site administration dashboard allowing bulk core/plugin installations, centralized database backup, uptime tracking, and real-time site resource usage analytics.
-              </p>
-              
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">PHP (Laravel)</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">WP REST API</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Vue.js</span>
-                <span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-slate-300">Tailwind</span>
-              </div>
+          <!-- SEO -->
+          <div class="dev-card p-6 space-y-4">
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-magnifying-glass text-emerald-400"></i> Technical SEO
+            </h3>
+            <div class="space-y-2 text-sm text-slate-300">
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>Technical SEO</span><span class="text-xs text-slate-500 font-mono">Crawlability</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>Schema Markup</span><span class="text-xs text-slate-500 font-mono">JSON-LD</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>XML Sitemap & Robots.txt</span><span class="text-xs text-slate-500 font-mono">Indexing</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>Core Web Vitals</span><span class="text-xs text-slate-500 font-mono">LCP/CLS/INP</span></div>
             </div>
+          </div>
 
-            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
-              <a href="#" class="btn-primary text-xs py-2.5">
-                <i class="fas fa-external-link-alt text-xs"></i>
-                <span>Live Demo</span>
-              </a>
-              <button class="project-details-btn btn-secondary text-xs py-2.5" data-project="project4">
-                <i class="fas fa-info-circle text-xs"></i>
-                <span>Details</span>
-              </button>
+          <!-- AI & Automation -->
+          <div class="dev-card p-6 space-y-4 lg:col-span-2">
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-robot text-purple-400"></i> AI & Automation
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300">
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>AI Agents</span><span class="text-xs text-slate-500 font-mono">Support Bots</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>n8n</span><span class="text-xs text-slate-500 font-mono">Workflows</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>WhatsApp Automation</span><span class="text-xs text-slate-500 font-mono">Lead Capture</span></div>
+              <div class="p-2.5 rounded-lg bg-white/5 flex justify-between items-center"><span>API Integration</span><span class="text-xs text-slate-500 font-mono">Bridging Systems</span></div>
             </div>
           </div>
 
@@ -816,199 +535,347 @@
     </section>
 
     <!-- ==========================================
-         6. TESTIMONIALS SECTION (Interactive Carousel)
+         DEVELOPMENT PROCESS
          ========================================== -->
-    <section id="testimonials" class="py-24 px-6 md:px-12 relative overflow-hidden">
-      <div class="max-w-4xl mx-auto space-y-16">
+    <section class="py-24 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto space-y-16">
         
-        <!-- Section Heading -->
         <div class="text-center space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">05 // FEEDBACK</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Client Testimonials</h2>
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Process</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Development Process</h2>
         </div>
 
-        <!-- Carousel Container -->
-        <div class="bento-card spotlight-card border-beam p-8 sm:p-12 md:p-14 relative">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          <div class="relative min-h-[220px] sm:min-h-[180px]" id="testimonial-slider">
-            
-            <!-- Slide 1 -->
-            <div class="testimonial-slide absolute inset-0 flex flex-col justify-center space-y-6 transition-all duration-500">
-              <p class="text-base sm:text-lg md:text-xl text-slate-200 italic font-light leading-relaxed">
-                "Ansaar rebuilt our entire eCommerce store on WordPress. Not only is the design absolutely stunning, but the conversion rate has doubled since the launch! His code quality is pristine and he was incredibly helpful in guiding us."
-              </p>
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold font-mono">SM</div>
-                <div>
-                  <h3 class="font-bold text-white text-base">Sarah Miller</h3>
-                  <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold font-mono">Founder, LeatherCraft Premium</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="testimonial-slide absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 pointer-events-none transition-all duration-500">
-              <p class="text-base sm:text-lg md:text-xl text-slate-200 italic font-light leading-relaxed">
-                "His understanding of WordPress core hooks and performance tuning is outstanding. He set up our hospital booking engine seamlessly and custom-styled the dashboard in Elementor. An exceptional full-stack professional."
-              </p>
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold font-mono">DR</div>
-                <div>
-                  <h3 class="font-bold text-white text-base">Dr. Robert Chen</h3>
-                  <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold font-mono">IT Director, CityHealth Clinic</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="testimonial-slide absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 pointer-events-none transition-all duration-500">
-              <p class="text-base sm:text-lg md:text-xl text-slate-200 italic font-light leading-relaxed">
-                "Ansaar has been managing our web systems for over 2 years. He resolves DNS configurations, server updates, and security patches without a minute of downtime. Extremely reliable developer whom you can trust completely."
-              </p>
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold font-mono">JA</div>
-                <div>
-                  <h3 class="font-bold text-white text-base">John Adams</h3>
-                  <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold font-mono">Chief Operating Officer, Horizon Tech</span>
-                </div>
-              </div>
-            </div>
-
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-purple-400">01 — DISCOVER</span>
+            <h3 class="text-xl font-bold text-white font-display">Discover</h3>
+            <p class="text-slate-400 text-sm">Understand requirements, business context and core goals.</p>
           </div>
 
-          <!-- Controls -->
-          <div class="flex justify-between items-center mt-8 pt-6 border-t border-white/10">
-            <div class="flex space-x-2" id="testimonial-dots">
-              <button class="p-1 cursor-pointer" data-slide="0" aria-label="Review 1"><span class="w-6 h-2 rounded-full bg-purple-500 inline-block transition-all"></span></button>
-              <button class="p-1 cursor-pointer" data-slide="1" aria-label="Review 2"><span class="w-2 h-2 rounded-full bg-white/20 inline-block transition-all"></span></button>
-              <button class="p-1 cursor-pointer" data-slide="2" aria-label="Review 3"><span class="w-2 h-2 rounded-full bg-white/20 inline-block transition-all"></span></button>
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-blue-400">02 — PLAN</span>
+            <h3 class="text-xl font-bold text-white font-display">Plan</h3>
+            <p class="text-slate-400 text-sm">Define structure, pages, user pathways and functionality.</p>
+          </div>
+
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-cyan-400">03 — DESIGN</span>
+            <h3 class="text-xl font-bold text-white font-display">Design</h3>
+            <p class="text-slate-400 text-sm">Create modern, accessible, human-crafted responsive UI/UX.</p>
+          </div>
+
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-emerald-400">04 — DEVELOP</span>
+            <h3 class="text-xl font-bold text-white font-display">Develop</h3>
+            <p class="text-slate-400 text-sm">Build and integrate the website with clean semantic code.</p>
+          </div>
+
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-amber-400">05 — TEST</span>
+            <h3 class="text-xl font-bold text-white font-display">Test</h3>
+            <p class="text-slate-400 text-sm">Test mobile, desktop, forms, links and core functionality.</p>
+          </div>
+
+          <div class="dev-card p-6 space-y-3">
+            <span class="text-xs font-mono font-bold text-purple-400">06 — LAUNCH</span>
+            <h3 class="text-xl font-bold text-white font-display">Launch</h3>
+            <p class="text-slate-400 text-sm">Technical SEO, analytics, security hardening and deployment.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PERFORMANCE & DEVELOPER STANDARDS
+         ========================================== -->
+    <section class="py-24 px-6 md:px-12 bg-[#0e1424]/30 border-t border-white/5">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Built for Performance -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Credibility</span>
+          <h2 class="text-3xl font-bold text-white font-display">Built for Performance</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Every web project is engineered for speed, clean asset loading, and compliance with Google's Core Web Vitals standards.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="dev-card p-4 text-center">
+              <div class="text-xs font-mono text-slate-400 mb-1">Performance</div>
+              <div class="text-sm font-semibold text-emerald-400">Optimized</div>
             </div>
-            
+            <div class="dev-card p-4 text-center">
+              <div class="text-xs font-mono text-slate-400 mb-1">Accessibility</div>
+              <div class="text-sm font-semibold text-emerald-400">Semantic & Accessible</div>
+            </div>
+            <div class="dev-card p-4 text-center">
+              <div class="text-xs font-mono text-slate-400 mb-1">Technical SEO</div>
+              <div class="text-sm font-semibold text-emerald-400">Schema Configured</div>
+            </div>
+            <div class="dev-card p-4 text-center">
+              <div class="text-xs font-mono text-slate-400 mb-1">Best Practices</div>
+              <div class="text-sm font-semibold text-emerald-400">Modern Standards</div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="badge-pill text-xs">Responsive design</span>
+            <span class="badge-pill text-xs">Image optimization</span>
+            <span class="badge-pill text-xs">Lazy loading</span>
+            <span class="badge-pill text-xs">Clean structure</span>
+            <span class="badge-pill text-xs">Core Web Vitals</span>
+          </div>
+        </div>
+
+        <!-- How I Build -->
+        <div class="lg:col-span-6 dev-card p-8 space-y-6">
+          <h3 class="text-2xl font-bold text-white font-display">How I Build</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-300 font-mono">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Responsive Design</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Mobile-first approach</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Semantic HTML</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Accessibility</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> SEO-friendly structure</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Clean URLs</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Secure forms</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Speed optimization</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Cross-browser testing</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Maintainable structure</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         EXPERIENCE & EDUCATION
+         ========================================== -->
+    <section id="experience" class="py-24 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Experience -->
+        <div class="lg:col-span-7 space-y-8">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Career</span>
+          <h2 class="text-3xl font-bold text-white font-display">Experience</h2>
+          
+          <div class="space-y-6">
+            <div class="timeline-item space-y-2">
+              <div class="timeline-dot"><div class="w-1.5 h-1.5 rounded-full bg-purple-400"></div></div>
+              <div class="text-xs font-mono text-purple-400">2023 — Present</div>
+              <h3 class="text-xl font-bold text-white font-display">WordPress & Web Developer</h3>
+              <div class="text-xs font-mono text-slate-400">Freelance / Project-Based Development</div>
+              <p class="text-slate-400 text-sm leading-relaxed pt-1">
+                Building bespoke WordPress websites, WooCommerce stores, and web solutions for international clients and businesses. Implementing technical SEO, speed optimization, and API automations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="lg:col-span-5 space-y-8">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Academic Background</span>
+          <h2 class="text-3xl font-bold text-white font-display">Education</h2>
+          
+          <div class="dev-card p-6 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-lg">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white font-display">Master in Physical Education</h3>
+            <div class="text-sm font-semibold text-slate-300">University of Sargodha</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TESTIMONIALS
+         ========================================== -->
+    <section class="py-24 px-6 md:px-12 bg-[#0e1424]/30 border-t border-white/5">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Feedback</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Client Reviews</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6">
+            <p class="text-slate-300 text-sm italic leading-relaxed">
+              "Muhammad rebuilt our entire eCommerce store on WooCommerce. The website is exceptionally fast, clean, and has noticeably improved our client conversions."
+            </p>
+            <div class="pt-4 border-t border-white/5 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold font-mono text-xs">AL</div>
+              <div>
+                <div class="font-bold text-white text-sm">Verified Client</div>
+                <div class="text-xs text-slate-500 font-mono">ArmanLeather • International</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6">
+            <p class="text-slate-300 text-sm italic leading-relaxed">
+              "His technical approach to WordPress architecture, speed optimization, and clean page structure made our business website project an absolute success."
+            </p>
+            <div class="pt-4 border-t border-white/5 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold font-mono text-xs">AG</div>
+              <div>
+                <div class="font-bold text-white text-sm">Verified Client</div>
+                <div class="text-xs text-slate-500 font-mono">Export Partner • United Kingdom</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dev-card p-8 flex flex-col justify-between space-y-6">
+            <p class="text-slate-300 text-sm italic leading-relaxed">
+              "Reliable, transparent, and skilled in both WordPress customization and modern web standards. Always delivers clean and maintainable work."
+            </p>
+            <div class="pt-4 border-t border-white/5 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold font-mono text-xs">TS</div>
+              <div>
+                <div class="font-bold text-white text-sm">Verified Client</div>
+                <div class="text-xs text-slate-500 font-mono">Services Agency • UAE</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         BLOG SECTION
+         ========================================== -->
+    <section id="blog" class="py-24 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Articles</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Developer Notes & Insights</h2>
+        </div>
+
+        <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT SECTION
+         ========================================== -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-[#0e1424]/40 border-t border-white/5">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-xs font-bold uppercase font-mono tracking-wider text-purple-400">Get in Touch</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white font-display">Have a project in mind?</h2>
+          <p class="text-slate-300 text-base">
+            Let's build something modern, fast and effective.
+          </p>
+
+          <div class="space-y-4 pt-4">
+            <!-- Email -->
+            <a href="mailto:ansaar.bhatti100@gmail.com" class="dev-card p-4 flex items-center gap-4 hover:border-purple-500/40">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 text-lg">
+                <i class="fa-regular fa-envelope"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-mono uppercase text-slate-400">Email</div>
+                <div class="text-sm font-semibold text-white">ansaar.bhatti100@gmail.com</div>
+              </div>
+            </a>
+
+            <!-- WhatsApp CTA -->
+            <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="dev-card p-4 flex items-center gap-4 hover:border-emerald-500/40">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-lg">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-mono uppercase text-slate-400">WhatsApp</div>
+                <div class="text-sm font-semibold text-white">0340-1350380</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="pt-6">
+            <div class="text-xs font-mono uppercase text-slate-400 mb-3">Connect on Social</div>
             <div class="flex space-x-3">
-              <button id="prev-testimonial-btn" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors" aria-label="Previous Review">
-                <i class="fas fa-chevron-left text-xs"></i>
-              </button>
-              <button id="next-testimonial-btn" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors" aria-label="Next Review">
-                <i class="fas fa-chevron-right text-xs"></i>
-              </button>
+              <a href="https://linkedin.com/in/ansaarbhatti" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://github.com/ansaarbhatti100" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
           </div>
-
         </div>
 
-      </div>
-    </section>
-
-    <!-- ==========================================
-         7. CONTACT SECTION (Bento Form & Info)
-         ========================================== -->
-    <section id="contact" class="py-24 px-6 md:px-12 relative overflow-hidden">
-      <div class="max-w-7xl mx-auto space-y-16">
-        
-        <!-- Section Heading -->
-        <div class="text-center md:text-left space-y-3">
-          <span class="text-purple-400 font-bold font-mono text-xs tracking-widest uppercase">06 // GET IN TOUCH</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-display">Let's build something epic together</h2>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Contact Info Bento Cards -->
-          <div class="lg:col-span-5 space-y-6">
-            <div class="bento-card spotlight-card p-8 space-y-6">
-              <h3 class="text-2xl font-bold text-white font-display">Contact Information</h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                If you have a business inquiry, an active proposal, or want to discuss a full-stack website migration or custom plugin project, feel free to send a message.
-              </p>
-              
-              <div class="space-y-4">
-                <!-- Email -->
-                <a href="mailto:ansaar.bhatti100@gmail.com" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-purple-500/40 hover:bg-purple-500/5 transition-all group">
-                  <div class="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-lg group-hover:bg-purple-500 group-hover:text-white transition-all">
-                    <i class="far fa-envelope"></i>
-                  </div>
-                  <div>
-                    <span class="block text-[10px] uppercase font-semibold text-slate-400 font-mono">Email Address</span>
-                    <span class="text-white font-semibold text-sm group-hover:text-purple-300 transition-colors">ansaar.bhatti100@gmail.com</span>
-                  </div>
-                </a>
-
-                <!-- WhatsApp -->
-                <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all group">
-                  <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-lg group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                    <i class="fab fa-whatsapp"></i>
-                  </div>
-                  <div>
-                    <span class="block text-[10px] uppercase font-semibold text-slate-400 font-mono">WhatsApp Support</span>
-                    <span class="text-white font-semibold text-sm group-hover:text-emerald-300 transition-colors">0340-1350380</span>
-                  </div>
-                </a>
-
-                <!-- LinkedIn -->
-                <a href="#" class="flex items-center space-x-4 bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-cyan-500/40 hover:bg-cyan-500/5 transition-all group">
-                  <div class="w-11 h-11 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-lg group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                    <i class="fab fa-linkedin-in"></i>
-                  </div>
-                  <div>
-                    <span class="block text-[10px] uppercase font-semibold text-slate-400 font-mono">LinkedIn Profile</span>
-                    <span class="text-white font-semibold text-sm group-hover:text-cyan-300 transition-colors">linkedin.com/in/ansaarbhatti</span>
-                  </div>
-                </a>
-              </div>
-
-              <!-- Social Profiles -->
-              <div class="pt-4 border-t border-white/5">
-                <span class="block text-[10px] uppercase font-semibold text-slate-400 font-mono tracking-widest mb-3">Follow My Coding Journey</span>
-                <div class="flex space-x-3">
-                  <a href="#" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                  <a href="#" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                  <a href="#" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Behance"><i class="fab fa-behance"></i></a>
-                  <a href="#" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Contact Form Bento Card -->
-          <div class="lg:col-span-7 bento-card spotlight-card p-8 sm:p-10">
-            <h3 class="text-2xl font-bold text-white font-display mb-6">Send a Message</h3>
+        <!-- Contact Form -->
+        <div class="lg:col-span-7 dev-card p-8 sm:p-10">
+          <form id="contact-form" class="space-y-6">
             
-            <form id="contact-form" class="space-y-6">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Name -->
-                <div class="space-y-2">
-                  <label for="form-name" class="block text-xs font-mono text-slate-400">Your Name</label>
-                  <input type="text" id="form-name" required placeholder="Your Name" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
-                </div>
-                
-                <!-- Email -->
-                <div class="space-y-2">
-                  <label for="form-email" class="block text-xs font-mono text-slate-400">Email Address</label>
-                  <input type="email" id="form-email" required placeholder="email@example.com" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
-                </div>
-              </div>
-
-              <!-- Subject -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <label for="form-subject" class="block text-xs font-mono text-slate-400">Subject</label>
-                <input type="text" id="form-subject" required placeholder="Project discussion / WordPress setup" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
+                <label for="form-name" class="block text-xs font-mono text-slate-400">Name *</label>
+                <input type="text" id="form-name" required placeholder="Your full name" class="form-input">
               </div>
-
-              <!-- Message -->
               <div class="space-y-2">
-                <label for="form-message" class="block text-xs font-mono text-slate-400">Message</label>
-                <textarea id="form-message" required rows="5" placeholder="Describe your project goals..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
+                <label for="form-email" class="block text-xs font-mono text-slate-400">Email *</label>
+                <input type="email" id="form-email" required placeholder="email@company.com" class="form-input">
               </div>
+            </div>
 
-              <!-- Submit -->
-              <button type="submit" id="submit-btn" class="btn-primary w-full py-4 text-sm font-bold">
-                <span>Send Message</span>
-                <i class="far fa-paper-plane text-xs"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="form-company" class="block text-xs font-mono text-slate-400">Company</label>
+                <input type="text" id="form-company" placeholder="Company / Brand name" class="form-input">
+              </div>
+              <div class="space-y-2">
+                <label for="form-project-type" class="block text-xs font-mono text-slate-400">Project Type</label>
+                <select id="form-project-type" class="form-input">
+                  <option value="WordPress Development">WordPress Development</option>
+                  <option value="WooCommerce Store">WooCommerce Store</option>
+                  <option value="Custom Web App">Custom Web App</option>
+                  <option value="Technical SEO / Speed">Technical SEO / Speed</option>
+                  <option value="AI & Automation">AI & Automation</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="form-budget" class="block text-xs font-mono text-slate-400">Estimated Budget</label>
+              <select id="form-budget" class="form-input">
+                <option value="<$500">&lt; $500</option>
+                <option value="$500 - $1,500">$500 — $1,500</option>
+                <option value="$1,500 - $3,000">$1,500 — $3,000</option>
+                <option value="$3,000+">$3,000+</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label for="form-message" class="block text-xs font-mono text-slate-400">Message *</label>
+              <textarea id="form-message" required rows="4" placeholder="Tell me about your goals, timeline, and requirements..." class="form-input resize-none"></textarea>
+            </div>
+
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button type="submit" class="btn-solid flex-1 sm:flex-initial py-3.5 px-8 text-sm">
+                <span>Start a Project</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
               </button>
-            </form>
-          </div>
+              <a href="https://wa.me/923401350380" target="_blank" rel="noopener noreferrer" class="btn-outline flex-1 sm:flex-initial py-3.5 px-8 text-sm text-emerald-400 hover:text-emerald-300">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp Me</span>
+              </a>
+            </div>
 
+            <div id="form-status" class="hidden"></div>
+          </form>
         </div>
 
       </div>
@@ -1016,96 +883,125 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/10 bg-[#030712]/80 backdrop-blur-md py-12 px-6 md:px-12 text-slate-400 text-sm relative z-10">
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="border-t border-white/5 bg-[#090d16] py-12 px-6 md:px-12 text-slate-400 text-sm relative z-10">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       
-      <!-- Logo -->
-      <div class="flex items-center space-x-2 text-xl font-bold tracking-tight">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-display">ANSAAR</span>
-        <span class="text-white font-light">BHATTI</span>
+      <div>
+        <div class="font-bold text-white font-display text-lg">Muhammad Ansaar</div>
+        <div class="text-xs text-purple-400 font-mono">WordPress & Web Developer</div>
+        <p class="text-xs text-slate-500 mt-1 max-w-sm">Building modern websites, eCommerce stores and web solutions.</p>
       </div>
 
-      <!-- Nav Links -->
-      <div class="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest font-semibold font-mono">
+      <div class="flex flex-wrap justify-center gap-6 text-xs font-mono">
         <a href="#home" class="hover:text-white transition-colors">Home</a>
         <a href="#about" class="hover:text-white transition-colors">About</a>
-        <a href="#skills" class="hover:text-white transition-colors">Skills</a>
         <a href="#services" class="hover:text-white transition-colors">Services</a>
         <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
       </div>
 
-      <!-- Copyright -->
-      <div class="text-center md:text-right text-xs text-slate-500 font-mono">
-        &copy; 2026 Ansaar Bhatti. All rights reserved. Designed for excellence.
+      <div class="text-center md:text-right text-xs text-slate-500 font-mono space-y-1">
+        <div>&copy; 2026 Muhammad Ansaar. All rights reserved.</div>
+        <div class="space-x-3 text-[11px]">
+          <a href="#" class="hover:underline">Privacy Policy</a>
+          <span>•</span>
+          <a href="#" class="hover:underline">Terms & Conditions</a>
+        </div>
       </div>
 
     </div>
   </footer>
 
   <!-- Scroll to Top Button -->
-  <button id="scroll-to-top-btn" class="fixed bottom-24 right-8 w-11 h-11 bg-purple-600/80 hover:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-md border border-white/10 opacity-0 pointer-events-none invisible translate-y-4 transition-all z-40" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up text-xs"></i>
+  <button id="back-to-top-btn" class="fixed bottom-24 right-6 w-10 h-10 rounded-xl bg-purple-600/80 hover:bg-purple-600 text-white flex items-center justify-center shadow-lg border border-white/10 opacity-0 pointer-events-none invisible transition-all z-40" aria-label="Back to Top">
+    <i class="fa-solid fa-arrow-up text-xs"></i>
   </button>
 
-  <!-- AI Chatbot Assistant Widget -->
-  <div id="ai-chatbot" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-    <!-- Chatbot Panel -->
-    <div id="chatbot-panel" class="hidden w-[360px] max-w-[90vw] h-[450px] bg-[#0c1222]/95 border border-white/10 backdrop-blur-2xl rounded-3xl shadow-2xl flex flex-col overflow-hidden mb-4 transform scale-95 opacity-0 origin-bottom-right transition-all duration-300">
-      <!-- Header -->
-      <div class="p-4 bg-white/5 border-b border-white/10 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="relative w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-purple-500 to-cyan-500">
-            <img src="/assets/profile.jpg" alt="Ansaar Bhatti" class="w-full h-full rounded-full object-cover">
-            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#030712] rounded-full"></span>
-          </div>
+  <!-- ==========================================
+       AI PORTFOLIO ASSISTANT WIDGET
+       ========================================== -->
+  <div id="ai-assistant-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Assistant Dialog Panel -->
+    <div id="ai-assistant-panel" class="hidden w-[360px] max-w-[90vw] h-[460px] dev-card bg-[#0e1424]/95 backdrop-blur-2xl shadow-2xl flex flex-col overflow-hidden mb-3 transform scale-95 opacity-0 origin-bottom-right transition-all duration-200">
+      
+      <!-- Panel Header -->
+      <div class="p-3.5 bg-white/5 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-mono font-bold">AI</div>
           <div>
-            <h4 class="text-sm font-bold text-white leading-tight">Ansaar's Assistant</h4>
-            <span class="text-[10px] text-emerald-400 font-mono font-semibold uppercase">AI Online</span>
+            <div class="text-xs font-bold text-white">Portfolio Assistant</div>
+            <div class="text-[10px] text-emerald-400 font-mono">Online • Ready to help</div>
           </div>
         </div>
-        <button id="chatbot-close" class="text-slate-400 hover:text-white transition-colors" aria-label="Close Chat">
-          <i class="fa-solid fa-xmark text-lg"></i>
+        <button id="ai-assistant-close" class="text-slate-400 hover:text-white" aria-label="Close Assistant">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Messages Box -->
-      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-4 font-sans text-xs">
-        <div class="flex items-start space-x-2.5">
-          <div class="w-7 h-7 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-bold flex-shrink-0">AI</div>
-          <div class="bg-white/5 border border-white/10 text-slate-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-sm leading-relaxed">
-            Hi! I am Ansaar's AI Assistant. How can I help you today? Ask me anything in any language!
+      <!-- Messages Stream -->
+      <div id="ai-messages-box" class="flex-1 p-3.5 overflow-y-auto space-y-3 text-xs">
+        <div class="flex items-start gap-2.5">
+          <div class="w-6 h-6 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-[10px] font-mono font-bold flex-shrink-0">AI</div>
+          <div class="bg-white/5 border border-white/10 text-slate-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed shadow-sm">
+            Hi! I'm Muhammad's portfolio assistant. Ask me about his projects, services, skills or development experience.
+          </div>
+        </div>
+
+        <!-- Prompt Suggestions -->
+        <div class="pt-2 space-y-1.5">
+          <div class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Suggested Queries</div>
+          <div class="flex flex-wrap gap-1.5">
+            <button class="ai-prompt-chip text-[11px] px-2.5 py-1 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300">What services does Muhammad offer?</button>
+            <button class="ai-prompt-chip text-[11px] px-2.5 py-1 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300">Show me his WordPress projects.</button>
+            <button class="ai-prompt-chip text-[11px] px-2.5 py-1 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300">Can he build a WooCommerce store?</button>
+            <button class="ai-prompt-chip text-[11px] px-2.5 py-1 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300">What technologies does he use?</button>
+            <button class="ai-prompt-chip text-[11px] px-2.5 py-1 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-300">I need a website.</button>
           </div>
         </div>
       </div>
 
-      <!-- Input Box -->
-      <div class="p-3 bg-[#030712]/60 border-t border-white/10 flex items-center space-x-2">
-        <input type="text" id="chatbot-input" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 focus:border-purple-500 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none placeholder-slate-500">
-        <button id="chatbot-send" class="w-9 h-9 rounded-xl bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-lg transition-colors" aria-label="Send Message">
-          <i class="fa-solid fa-paper-plane text-xs"></i>
+      <!-- User Input -->
+      <div class="p-2.5 bg-[#090d16]/80 border-t border-white/10 flex items-center space-x-2">
+        <input type="text" id="ai-input-text" placeholder="Type a question..." class="flex-1 bg-white/5 border border-white/10 focus:border-purple-500 rounded-lg px-3 py-2 text-xs text-white focus:outline-none">
+        <button id="ai-send-btn" class="w-8 h-8 rounded-lg bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center text-xs" aria-label="Send Message">
+          <i class="fa-solid fa-paper-plane"></i>
         </button>
       </div>
+
     </div>
 
-    <!-- Toggle Button -->
-    <button id="chatbot-toggle" class="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 text-white flex items-center justify-center shadow-[0_4px_25px_rgba(168,85,247,0.4)] hover:scale-105 transition-all cursor-pointer relative" aria-label="Open Chatbot">
-      <i class="fa-solid fa-comments text-xl"></i>
-      <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-[#030712] animate-pulse"></span>
+    <!-- Floating Toggle Button -->
+    <button id="ai-assistant-toggle" class="btn-solid text-xs py-2.5 px-4 rounded-full shadow-2xl flex items-center gap-2">
+      <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+      <span>Ask About My Work</span>
     </button>
   </div>
 
-  <!-- Project Details Modal -->
-  <div id="project-modal" class="fixed inset-0 bg-[#030712]/85 backdrop-blur-md z-[99999] opacity-0 pointer-events-none invisible transition-all duration-300 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-    <div class="bento-card border-beam max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl">
-      <button id="modal-close-btn" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-50" aria-label="Close Modal">
-        <i class="fas fa-times text-sm"></i>
+  <!-- Reusable Case Study Modal -->
+  <div id="case-study-modal" class="fixed inset-0 bg-[#090d16]/90 backdrop-blur-md z-[99999] opacity-0 pointer-events-none invisible transition-all duration-300 flex items-center justify-center p-4">
+    <div class="dev-card bg-[#0e1424] max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl">
+      <button id="case-study-close" class="absolute top-5 right-5 w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-50" aria-label="Close Case Study">
+        <i class="fa-solid fa-xmark text-sm"></i>
       </button>
-      <div id="modal-content" class="space-y-6"></div>
+      <div id="case-study-content"></div>
     </div>
   </div>
 
-  <!-- JavaScript Modules -->
+  <!-- Reusable Blog Post Modal -->
+  <div id="blog-modal" class="fixed inset-0 bg-[#090d16]/90 backdrop-blur-md z-[99999] opacity-0 pointer-events-none invisible transition-all duration-300 flex items-center justify-center p-4">
+    <div class="dev-card bg-[#0e1424] max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
+      <button id="blog-modal-close" class="absolute top-5 right-5 w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-50" aria-label="Close Blog Reader">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+      <div id="blog-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Entry -->
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
