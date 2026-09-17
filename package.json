@@ -1,0 +1,10 @@
+{
+  "name": "muhammad-ansaar-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo Build Successful",
+    "start": "echo Start"
+  }
+}
